@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark" style="background-color: #050811 !important; color: #f1f5f9;">
+<html lang="en" class="scroll-smooth dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ishmam Ayon | CEO @ Axiolab | Full-Stack Architect & AI Systems Engineer</title>
+    <title>Ishmam Ayon — Full-Stack Architect & Founder @ Axiolab</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,8 +14,19 @@
             theme: {
                 extend: {
                     colors: {
-                        obsidian: { 950: '#050811', 900: '#090d1a', 850: '#101628', 800: '#182038' },
-                        neon: { cyan: '#00f0ff', blue: '#3b82f6', purple: '#8b5cf6', emerald: '#10b981' }
+                        slate: {
+                            950: '#0b0f19',
+                            900: '#111827',
+                            850: '#161e31',
+                            800: '#1f293d',
+                            700: '#334155'
+                        },
+                        brand: {
+                            blue: '#3b82f6',
+                            cyan: '#06b6d4',
+                            indigo: '#6366f1',
+                            emerald: '#10b981'
+                        }
                     },
                     fontFamily: {
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
@@ -26,336 +37,211 @@
         }
     </script>
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        /* Force dark background across HTML & Body */
-        html,
+    <style>
         body {
-            background-color: #050811 !important;
-            color: #f1f5f9 !important;
+            background-color: #0b0f19;
+            color: #f3f4f6;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
-            margin: 0;
-            padding: 0;
         }
 
         .mono {
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Subtle Grid Pattern */
-        .grid-bg {
-            background-size: 36px 36px;
-            background-image:
+        /* Subtle grid background */
+        .bg-grid {
+            background-size: 32px 32px;
+            background-image: 
                 linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
 
-        /* Mouse cursor spotlight glow */
-        .spotlight {
-            background: radial-gradient(700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 240, 255, 0.07), transparent 45%);
-        }
-
-        /* Glassmorphism Card Style */
+        /* Refined glassmorphism card styling */
         .glass-card {
-            background: rgba(16, 22, 40, 0.85) !important;
-            backdrop-filter: blur(16px);
+            background: rgba(22, 30, 49, 0.7);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .glass-card:hover {
-            border-color: rgba(0, 240, 255, 0.35);
-            box-shadow: 0 0 35px -5px rgba(0, 240, 255, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.15);
         }
 
-        /* Bi-directional scroll reveals with smooth fail-safe fallback */
-        .reveal-left,
-        .reveal-right,
-        .reveal-up {
-            opacity: 1;
-            transform: translate(0, 0);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .js-reveal .reveal-left {
+        /* Custom scroll animations: Slide from left & right */
+        .slide-from-left {
             opacity: 0;
-            transform: translateX(-35px);
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
 
-        .js-reveal .reveal-right {
+        .slide-from-right {
             opacity: 0;
-            transform: translateX(35px);
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
 
-        .js-reveal .reveal-up {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .js-reveal .reveal-left.active,
-        .js-reveal .reveal-right.active,
-        .js-reveal .reveal-up.active {
+        .slide-in-visible {
             opacity: 1 !important;
-            transform: translate(0, 0) !important;
+            transform: translateX(0) !important;
         }
 
-        /* Marquee Keyframe Animations */
-        @keyframes marquee {
-            0% {
-                transform: translateX(0%);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .animate-marquee {
-            display: flex;
-            width: 200%;
-            animation: marquee 30s linear infinite;
-        }
-
-        .animate-marquee:hover {
-            animation-play-state: paused;
-        }
-
-        /* Architect Mode Schematic Overlay */
-        body.architect-mode .glass-card {
-            border-color: rgba(0, 240, 255, 0.5) !important;
-            background: rgba(5, 8, 17, 0.98) !important;
-        }
-
-        /* Custom Scrollbar */
+        /* Custom subtle scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
         }
-
         ::-webkit-scrollbar-track {
-            background: #050811;
+            background: #0b0f19;
         }
-
         ::-webkit-scrollbar-thumb {
-            background: #1e293b;
+            background: #1f293d;
             border-radius: 9999px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
-            background: #00f0ff;
+            background: #3b82f6;
         }
     </style>
-    <script>
-        document.documentElement.classList.add('js-reveal');
-    </script>
 </head>
 
-<body
-    class="bg-[#050811] text-slate-100 grid-bg spotlight min-h-screen selection:bg-cyan-400 selection:text-black relative">
+<body class="bg-[#0b0f19] text-slate-100 bg-grid min-h-screen selection:bg-blue-500 selection:text-white relative">
 
-    <!-- Cybernetic Preloader Screen -->
-    <div id="preloader"
-        class="fixed inset-0 z-[100] bg-[#050811] flex flex-col items-center justify-center transition-opacity duration-700 ease-out">
-        <div class="relative flex flex-col items-center max-w-sm px-6 text-center">
-            <!-- Hex Core Loader Ring -->
-            <div class="relative w-24 h-24 mb-6 flex items-center justify-center">
-                <div class="absolute inset-0 rounded-full border-2 border-dashed border-cyan-500/30 animate-spin"
-                    style="animation-duration: 8s;"></div>
-                <div class="absolute inset-2 rounded-full border-2 border-t-cyan-400 border-r-indigo-500 border-b-purple-500 border-l-transparent animate-spin"
-                    style="animation-duration: 1.5s;"></div>
-                <div
-                    class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-400/50 flex items-center justify-center text-cyan-400 font-mono text-xs font-bold tracking-widest shadow-[0_0_20px_rgba(0,240,255,0.3)]">
-                    AX
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0b0f19]/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            
+            <!-- Brand Identity -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                    IA
                 </div>
-            </div>
-
-            <!-- Terminal Status Text -->
-            <div class="text-xs font-mono text-cyan-400 tracking-[0.25em] uppercase mb-3 flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
-                <span id="loader-status">INITIALIZING SYSTEM...</span>
-            </div>
-
-            <!-- Cyber Progress Bar -->
-            <div class="w-full bg-[#101628] h-1.5 rounded-full overflow-hidden border border-white/10 p-0.5">
-                <div id="loader-bar"
-                    class="h-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-purple-500 rounded-full w-0 transition-all duration-300 ease-out shadow-[0_0_12px_rgba(0,240,255,0.8)]">
+                <div class="flex flex-col">
+                    <span class="font-bold text-white tracking-tight leading-tight text-base">Ishmam Ayon</span>
+                    <span class="text-[11px] text-slate-400 font-mono">Founder & CEO @ Axiolab</span>
                 </div>
-            </div>
+            </a>
 
-            <!-- Percentage Counter -->
-            <div class="mt-3 text-[10px] font-mono text-slate-400 flex justify-between w-full">
-                <span>AXIOLAB OS v3.6</span>
-                <span id="loader-percent" class="text-cyan-300 font-bold">0%</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Interactive Background Canvas -->
-    <canvas id="neural-canvas" class="fixed inset-0 w-full h-full pointer-events-auto z-0 opacity-20"></canvas>
-
-    <!-- Central Floating Navigation -->
-    <nav class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-        <div
-            class="bg-[#090d1a]/90 border border-white/10 backdrop-blur-xl px-6 py-3 rounded-full flex items-center gap-8 shadow-2xl transition-all hover:border-cyan-500/40">
-
-            <!-- Mobile Brand Label -->
-            <div class="md:hidden text-xs mono text-cyan-400 font-bold tracking-widest flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-                AXIOLAB // ISHMAM
-            </div>
-
-            <!-- Central Desktop Navigation Links -->
-            <div
-                class="hidden md:flex items-center space-x-8 text-xs font-semibold text-slate-300 tracking-[0.18em] uppercase">
-                <a href="#home" class="hover:text-cyan-400 transition-all hover:scale-105">Home</a>
-                <a href="#simulator" class="hover:text-cyan-400 transition-all hover:scale-105">Terminal</a>
-                <a href="#projects" class="hover:text-cyan-400 transition-all hover:scale-105">Case Studies</a>
-                <a href="#achievements" class="hover:text-cyan-400 transition-all hover:scale-105">Track Record</a>
-                <a href="#testimonials" class="hover:text-cyan-400 transition-all hover:scale-105">Endorsements</a>
-                <a href="#contact"
-                    class="bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 text-cyan-300 border border-cyan-500/40 px-4 py-1.5 rounded-full hover:border-cyan-400 hover:text-white transition-all hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]">
-                    Contact
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                <a href="#axiolab" class="hover:text-blue-400 transition-colors">My Company</a>
+                <a href="#architecture" class="hover:text-blue-400 transition-colors">Engineering</a>
+                <a href="#projects" class="hover:text-blue-400 transition-colors">Work</a>
+                <a href="#contact" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg transition-all shadow-md shadow-blue-600/20 normal-case font-medium text-sm">
+                    Get in Touch
                 </a>
-            </div>
-
-            <!-- Architect Mode Toggle Button -->
-            <button id="architect-toggle" onclick="toggleArchitectMode()"
-                class="hidden lg:flex items-center gap-2 text-[10px] mono border border-slate-800 bg-[#101628] px-3 py-1 rounded-full text-slate-400 hover:text-cyan-300 hover:border-cyan-500/50 transition-all">
-                <span class="w-1.5 h-1.5 rounded-full bg-slate-500" id="mode-dot"></span>
-                <span id="mode-text">ARCHITECT: OFF</span>
-            </button>
+            </nav>
 
             <!-- Mobile Menu Trigger -->
-            <button id="menu-btn" onclick="toggleMobileMenu()"
-                class="md:hidden text-slate-300 focus:outline-none p-1.5 rounded-lg bg-[#101628] border border-white/10">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-                    </path>
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg bg-slate-900 border border-white/10 text-slate-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
         </div>
 
         <!-- Mobile Drawer Navigation -->
-        <div id="mobile-menu"
-            class="hidden absolute top-16 left-4 right-4 bg-[#090d1a]/95 border border-white/10 rounded-2xl p-6 space-y-4 text-center backdrop-blur-2xl shadow-2xl">
-            <a href="#home" onclick="toggleMobileMenu()"
-                class="block text-xs font-bold text-slate-300 uppercase tracking-widest py-2 hover:text-cyan-400">Home</a>
-            <a href="#simulator" onclick="toggleMobileMenu()"
-                class="block text-xs font-bold text-slate-300 uppercase tracking-widest py-2 hover:text-cyan-400">Terminal</a>
-            <a href="#projects" onclick="toggleMobileMenu()"
-                class="block text-xs font-bold text-slate-300 uppercase tracking-widest py-2 hover:text-cyan-400">Case
-                Studies</a>
-            <a href="#achievements" onclick="toggleMobileMenu()"
-                class="block text-xs font-bold text-slate-300 uppercase tracking-widest py-2 hover:text-cyan-400">Track
-                Record</a>
-            <a href="#testimonials" onclick="toggleMobileMenu()"
-                class="block text-xs font-bold text-slate-300 uppercase tracking-widest py-2 hover:text-cyan-400">Endorsements</a>
-            <a href="#contact" onclick="toggleMobileMenu()"
-                class="block text-xs font-bold text-cyan-400 uppercase tracking-widest py-2">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#111827] border-b border-white/10 px-6 py-6 space-y-4">
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-sm font-medium text-slate-300 hover:text-blue-400">About</a>
+            <a href="#axiolab" onclick="toggleMobileMenu()" class="block text-sm font-medium text-slate-300 hover:text-blue-400">My Company (Axiolab)</a>
+            <a href="#architecture" onclick="toggleMobileMenu()" class="block text-sm font-medium text-slate-300 hover:text-blue-400">Engineering</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block text-sm font-medium text-slate-300 hover:text-blue-400">Work & Case Studies</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-sm font-medium text-blue-400 font-bold">Get in Touch →</a>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section id="home" class="relative z-10 pt-36 md:pt-44 pb-24 px-6 max-w-7xl mx-auto min-h-screen flex items-center">
-        <div class="grid md:grid-cols-12 gap-12 items-center w-full">
+    <section id="home" class="pt-28 md:pt-36 pb-20 px-6 max-w-7xl mx-auto flex items-center min-h-[85vh]">
+        <div class="grid md:grid-cols-12 gap-10 items-center w-full">
 
-            <!-- Hero Text Content -->
-            <div class="md:col-span-7 space-y-8 reveal-left">
-
-                <!-- Authority Badge -->
-                <div
-                    class="inline-flex items-center gap-3 border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 rounded-full text-cyan-300 text-xs font-mono tracking-widest uppercase shadow-lg">
-                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-                    CEO @ AXIOLAB &bull; FULL-STACK & AI ARCHITECT
+            <!-- Hero Main Copy -->
+            <div class="md:col-span-7 space-y-6 slide-from-left">
+                
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-mono font-medium shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                    Full-Stack Architect & Founder @ Axiolab Studio
                 </div>
 
-                <!-- Headline -->
-                <div class="space-y-1">
-                    <span class="text-sm font-mono text-cyan-400 font-semibold tracking-widest uppercase block">&gt; Hi
-                        there, I'm</span>
-                    <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[0.95]">
-                        Ishmam <br>
-                        <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400">Ayon</span>
+                <div class="space-y-2">
+                    <span class="text-xs sm:text-sm font-mono text-blue-400 font-semibold uppercase tracking-wider block">Engineering Digital Excellence</span>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight min-h-[1.25em] flex items-center flex-wrap">
+                        <span>I'm&nbsp;</span><span id="typewriter-text" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400"></span><span id="typewriter-cursor" class="inline-block w-[3px] sm:w-[4px] h-[0.85em] bg-blue-400 align-middle ml-1 animate-pulse"></span>
                     </h1>
                 </div>
 
-                <!-- Executive Bio -->
-                <p class="text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl font-light">
-                    Welcome to my engineering hub. I specialize in architecting high-concurrency web systems,
-                    intelligent multi-agent AI ecosystems, and resilient enterprise applications—transforming complex
-                    technical challenges into scalable, real-world solutions.
+                <h2 class="text-lg sm:text-2xl font-bold text-slate-200 tracking-tight leading-snug">
+                    Building high-performance web systems, robust Django/FastAPI backends, and smart AI workflows.
+                </h2>
+
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl font-light">
+                    As the founder of <strong class="text-white font-semibold">Axiolab</strong>, I partner with ambitious startups and enterprises to architect resilient software products from the ground up—combining sleek user interfaces with rock-solid database engineering.
                 </p>
 
-                <!-- Core Engineering Pillars -->
-                <div class="flex flex-wrap gap-3 pt-2 text-xs font-mono text-slate-300">
-                    <span
-                        class="border border-white/10 bg-[#101628] px-4 py-2 rounded-xl flex items-center gap-2 hover:border-cyan-500/50 transition-colors">
-                        <span class="text-cyan-400">&gt;</span> Python & Django Enterprise Platforms
-                    </span>
-                    <span
-                        class="border border-white/10 bg-[#101628] px-4 py-2 rounded-xl flex items-center gap-2 hover:border-indigo-500/50 transition-colors">
-                        <span class="text-indigo-400">&gt;</span> Multi-Agent Swarm Orchestration
-                    </span>
-                    <span
-                        class="border border-white/10 bg-[#101628] px-4 py-2 rounded-xl flex items-center gap-2 hover:border-purple-500/50 transition-colors">
-                        <span class="text-purple-400">&gt;</span> High-Concurrency MySQL Architecture
-                    </span>
+                <!-- Quick Highlight Metric Pills -->
+                <div class="grid grid-cols-3 gap-3 py-2 max-w-lg">
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800/80 shadow-sm">
+                        <div class="text-white font-bold text-base font-mono">100%</div>
+                        <div class="text-[11px] text-slate-400">Custom Code</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800/80 shadow-sm">
+                        <div class="text-blue-400 font-bold text-base font-mono">Full-Stack</div>
+                        <div class="text-[11px] text-slate-400">End-to-End Delivery</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800/80 shadow-sm">
+                        <div class="text-emerald-400 font-bold text-base font-mono">Secure</div>
+                        <div class="text-[11px] text-slate-400">Optimized APIs</div>
+                    </div>
                 </div>
 
-                <!-- Call to Action Buttons -->
-                <div class="flex flex-wrap gap-5 pt-4">
-                    <a href="#projects"
-                        class="bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold px-8 py-4 rounded-2xl transition-all shadow-[0_0_25px_rgba(0,240,255,0.25)] hover:scale-105 flex items-center gap-3 text-sm">
-                        <span>View Production Case Studies</span>
+                <!-- Core Technologies -->
+                <div class="pt-1 flex flex-wrap gap-2.5 text-xs font-mono text-slate-300">
+                    <span class="bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-lg">Python / Django</span>
+                    <span class="bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-lg">React / Next.js</span>
+                    <span class="bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-lg">FastAPI</span>
+                    <span class="bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-lg">MySQL & PostgreSQL</span>
+                    <span class="bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-lg">Automated Workflows</span>
+                </div>
+
+                <!-- CTAs -->
+                <div class="pt-4 flex flex-wrap gap-4">
+                    <a href="#projects" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/25 flex items-center gap-2 text-sm">
+                        <span>View Featured Work</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </a>
-                    <a href="#simulator"
-                        class="border border-slate-800 bg-[#101628] hover:border-cyan-500/50 hover:bg-slate-900 text-slate-300 px-8 py-4 rounded-2xl font-semibold transition-all hover:scale-105 text-sm">
-                        Launch System Terminal
+                    <a href="#axiolab" class="bg-slate-900 hover:bg-slate-850 text-slate-200 border border-slate-800 font-semibold px-6 py-3.5 rounded-xl transition-all text-sm">
+                        About Axiolab Studio
                     </a>
                 </div>
             </div>
 
-            <!-- Profile Image Frame with HUD reticles -->
-            <div class="md:col-span-5 flex justify-center reveal-right">
-                <div class="relative group w-full max-w-md aspect-square rounded-3xl border border-cyan-500/40 bg-[#090d1a] backdrop-blur-xl p-3 transition-all hover:border-cyan-400 hover:shadow-[0_0_40px_rgba(0,240,255,0.25)] cursor-pointer overflow-hidden"
-                    onclick="triggerCanvasPulse()">
-
-                    <!-- Cybernetic HUD Corners -->
-                    <div
-                        class="absolute top-4 left-4 w-5 h-5 border-t-2 border-l-2 border-cyan-400 z-20 pointer-events-none">
-                    </div>
-                    <div
-                        class="absolute top-4 right-4 w-5 h-5 border-t-2 border-r-2 border-cyan-400 z-20 pointer-events-none">
-                    </div>
-                    <div
-                        class="absolute bottom-4 left-4 w-5 h-5 border-b-2 border-l-2 border-cyan-400 z-20 pointer-events-none">
-                    </div>
-                    <div
-                        class="absolute bottom-4 right-4 w-5 h-5 border-b-2 border-r-2 border-cyan-400 z-20 pointer-events-none">
-                    </div>
-
-                    <!-- Profile Photo -->
-                    <img id="executive-photo" src="profile.png" alt="Ishmam Ayon - CEO @ Axiolab" loading="eager"
-                        decoding="async" width="400" height="400"
-                        onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80';"
-                        class="w-full h-full object-cover object-top rounded-2xl border border-cyan-500/30 group-hover:scale-105 transition-transform duration-500 block">
-
-                    <!-- Gradient Mask Overlay -->
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-[#050811]/90 via-transparent to-transparent rounded-2xl pointer-events-none z-10">
-                    </div>
-
-                    <!-- CEO Live Badge -->
-                    <div
-                        class="absolute bottom-4 right-4 z-20 bg-[#090d1a]/95 border border-emerald-500/40 px-3 py-1 rounded-full text-[10px] font-mono text-emerald-400 flex items-center gap-2 backdrop-blur-md shadow-xl">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> CEO @ AXIOLAB
+            <!-- Profile / Executive Visual -->
+            <div class="md:col-span-5 flex justify-center slide-from-right">
+                <div class="relative w-full max-w-sm rounded-2xl glass-card p-3.5 border border-white/10 shadow-2xl">
+                    <div class="relative rounded-xl overflow-hidden aspect-[4/5] bg-slate-900 border border-white/5">
+                        <!-- References local profile.png from repo with cloud fallback -->
+                        <img id="profile-img" src="profile.png" alt="Ishmam Ayon" 
+                             onerror="this.onerror=null; this.src='https://i.postimg.cc/14xxMtSk/profile.png';"
+                             class="w-full h-full object-cover object-top">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0f19] via-transparent to-transparent"></div>
+                        
+                        <div class="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 text-xs">
+                            <div class="font-bold text-white text-sm">Ishmam Ayon</div>
+                            <div class="text-slate-400 font-mono text-[11px]">Founder & Lead Developer @ Axiolab</div>
+                            <div class="mt-2.5 pt-2.5 border-t border-white/10 flex justify-between text-[10px] text-slate-300 font-mono">
+                                <span>LOCATION: Global / Remote</span>
+                                <span class="text-emerald-400">● Open for Work</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -363,764 +249,637 @@
         </div>
     </section>
 
-    <!-- Production Tech Stack Marquee -->
-    <section class="py-14 border-y border-white/5 bg-[#090d1a]/90 overflow-hidden select-none relative z-10">
-        <div class="text-center mb-8">
-            <span class="text-[10px] font-mono text-cyan-400 uppercase tracking-[0.35em]">// PRODUCTION TECH STACK &
-                INFRASTRUCTURE</span>
-        </div>
-
-        <div class="overflow-hidden mb-2 flex">
-            <div class="animate-marquee whitespace-nowrap flex space-x-6 items-center">
-
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3 hover:border-yellow-400/60 transition-all">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                        alt="Python" class="w-5 h-5 object-contain"
-                        onerror="this.onerror=null; this.src='https://placehold.co/20x20/050811/3776AB?text=PY';">
-                    <span>PYTHON</span>
-                </span>
-
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3 hover:border-yellow-400/60 transition-all">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                        alt="JavaScript" class="w-5 h-5 rounded-sm object-contain"
-                        onerror="this.onerror=null; this.src='https://placehold.co/20x20/050811/F7DF1E?text=JS';">
-                    <span>JAVASCRIPT</span>
-                </span>
-
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3 hover:border-emerald-500/60 transition-all">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="Django"
-                        class="w-5 h-5 object-contain filter invert brightness-200"
-                        onerror="this.onerror=null; this.src='https://placehold.co/20x20/050811/092E20?text=DJ';">
-                    <span>DJANGO</span>
-                </span>
-
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3 hover:border-blue-500/60 transition-all">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"
-                        class="w-5 h-5 object-contain"
-                        onerror="this.onerror=null; this.src='https://placehold.co/20x20/050811/00618A?text=SQL';">
-                    <span>MYSQL</span>
-                </span>
-
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3 hover:border-cyan-400/60 transition-all">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"
-                        class="w-5 h-5 object-contain animate-spin" style="animation-duration: 12s;"
-                        onerror="this.onerror=null; this.src='https://placehold.co/20x20/050811/61DAFB?text=REACT';">
-                    <span>REACT</span>
-                </span>
-
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3 hover:border-teal-400/60 transition-all">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
-                        alt="Tailwind CSS" class="w-5 h-5 object-contain"
-                        onerror="this.onerror=null; this.src='https://placehold.co/20x20/050811/38BDF8?text=TW';">
-                    <span>TAILWIND CSS</span>
-                </span>
-
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3 hover:border-orange-500/60 transition-all">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"
-                        class="w-5 h-5 object-contain"
-                        onerror="this.onerror=null; this.src='https://placehold.co/20x20/050811/E34F26?text=HTML';">
-                    <span>HTML5</span>
-                </span>
-
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3 hover:border-blue-400/60 transition-all">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"
-                        class="w-5 h-5 object-contain"
-                        onerror="this.onerror=null; this.src='https://placehold.co/20x20/050811/1572B6?text=CSS';">
-                    <span>CSS3</span>
-                </span>
-
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3 hover:border-emerald-400/60 transition-all">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg"
-                        alt="FastAPI" class="w-5 h-5 object-contain"
-                        onerror="this.onerror=null; this.src='https://placehold.co/20x20/050811/059669?text=API';">
-                    <span>FASTAPI</span>
-                </span>
-
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3 hover:border-indigo-400/60 transition-all">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
-                        alt="PostgreSQL" class="w-5 h-5 object-contain"
-                        onerror="this.onerror=null; this.src='https://placehold.co/20x20/050811/336791?text=PG';">
-                    <span>POSTGRESQL</span>
-                </span>
-
-                <!-- Loop repeat -->
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                        alt="Python" class="w-5 h-5 object-contain">
-                    <span>PYTHON</span>
-                </span>
-                <span
-                    class="px-5 py-3 rounded-2xl bg-[#101628] border border-slate-800 text-slate-200 font-mono text-xs font-bold flex items-center gap-3">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-                        alt="JavaScript" class="w-5 h-5 object-contain">
-                    <span>JAVASCRIPT</span>
-                </span>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive System Terminal -->
-    <section id="simulator" class="py-28 max-w-7xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-16 reveal-up">
-            <h2 class="text-xs text-cyan-400 font-mono tracking-[0.3em] mb-3 uppercase">// SYSTEM DEMO TERMINAL</h2>
-            <h3 class="text-4xl md:text-5xl font-black text-white">Live System & AI Pipeline Simulator</h3>
-            <p class="text-slate-300 mt-4 max-w-2xl mx-auto text-sm">Select an operational workload and engine strategy
-                to simulate real-time query latency, token efficiency, and transactional database outputs.</p>
-        </div>
-
-        <div class="glass-card rounded-3xl p-8 md:p-10 transition-all">
-            <div class="grid md:grid-cols-12 gap-8 items-center">
-
-                <!-- Input Controls -->
-                <div class="md:col-span-5 space-y-6">
-                    <div>
-                        <label class="block text-xs font-mono uppercase text-slate-300 mb-2">1. Select Ingestion
-                            Payload</label>
-                        <select id="sim-payload"
-                            class="w-full bg-[#050811] border border-slate-800 rounded-xl px-4 py-3 text-white text-xs font-mono focus:border-cyan-500 focus:outline-none transition-colors">
-                            <option value="doc">Enterprise Document Batch (1,000 PDFs)</option>
-                            <option value="ecom">E-Commerce Inventory Sync (50k SKU updates)</option>
-                            <option value="stream">Real-time Telemetry Stream (10k events/s)</option>
-                            <option value="support">Customer Support Ticket Routing Matrix</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-mono uppercase text-slate-300 mb-2">2. Select Strategy
-                            Engine</label>
-                        <select id="sim-strategy"
-                            class="w-full bg-[#050811] border border-slate-800 rounded-xl px-4 py-3 text-white text-xs font-mono focus:border-cyan-500 focus:outline-none transition-colors">
-                            <option value="multi-agent">Multi-Agent Swarm (Axiolab Engine)</option>
-                            <option value="django-queue">Django Async Celery Queue Engine</option>
-                            <option value="rag">Hybrid Vector Search + RAG Cache</option>
-                            <option value="direct">Direct Multi-LLM Router</option>
-                        </select>
-                    </div>
-
-                    <button onclick="runSimulation()"
-                        class="w-full bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-cyan-500/20 text-xs font-mono tracking-widest uppercase flex items-center justify-center gap-2">
-                        <span>▶ Execute Pipeline</span>
-                    </button>
-                </div>
-
-                <!-- Terminal Log Display -->
-                <div
-                    class="md:col-span-7 bg-[#050811] border border-slate-800 rounded-2xl p-6 font-mono text-xs text-slate-300 space-y-4 relative min-h-[240px]">
-                    <div class="flex items-center justify-between border-b border-white/10 pb-3">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
-                            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
-                            <span class="text-[10px] text-slate-400 ml-2">TERMINAL // AXIOLAB OS</span>
-                        </div>
-                        <span id="sim-status" class="text-xs text-cyan-400 font-bold">IDLE</span>
-                    </div>
-
-                    <div id="sim-log" class="space-y-2 h-40 overflow-y-auto text-[11px] text-slate-300">
-                        <div>&gt; System terminal ready. Select parameters and click "Execute Pipeline"...</div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Production Case Studies -->
-    <section id="projects" class="py-28 max-w-7xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-20 reveal-up">
-            <h2 class="text-xs text-cyan-400 font-mono tracking-[0.3em] mb-3 uppercase">PRODUCTION ARCHITECTURES &
-                SYSTEMS</h2>
-            <h3 class="text-4xl md:text-5xl font-black text-white">Featured Case Studies</h3>
-            <p class="text-slate-300 mt-4 max-w-2xl mx-auto text-sm">Real enterprise applications, full-stack Python
-                engines, and autonomous AI swarms engineered for high concurrency and scale.</p>
-        </div>
-
-        <div class="space-y-16">
-
-            <!-- Case Study 01: Brialto E-Commerce Platform -->
-            <div class="glass-card rounded-3xl p-8 md:p-10 transition-all hover:scale-[1.01] hover:border-cyan-400/60 hover:shadow-[0_0_40px_rgba(0,240,255,0.2)] cursor-pointer group reveal-left relative"
-                onclick="openProjectModal('brialto')">
-                <div
-                    class="absolute top-6 right-6 text-xs font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                    <span>Click for Details</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                    </svg>
-                </div>
-                <div class="grid md:grid-cols-12 gap-8 items-center">
-
-                    <div class="md:col-span-7 space-y-6">
-                        <div class="flex items-center gap-3">
-                            <span
-                                class="mono text-xs text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">FEATURED
-                                PROJECT</span>
-                            <span class="text-xs text-cyan-400 font-mono">E-COMMERCE STOREFRONT</span>
-                        </div>
-                        <h4 class="text-3xl font-bold text-white group-hover:text-cyan-300 transition-colors">Brialto —
-                            Next-Gen E-Commerce & Retail Experience</h4>
-                        <p class="text-slate-300 leading-relaxed text-sm font-light">
-                            Designed and built Brialto, a modern headless e-commerce store built for smooth multi-device
-                            shopping, fast inventory cataloging, and secure payment processing.
-                        </p>
-
-                        <!-- Metrics Row -->
-                        <div class="grid grid-cols-3 gap-4 pt-2 border-t border-white/10">
-                            <div>
-                                <div class="text-xl md:text-2xl font-black text-emerald-400">&lt;1.2s</div>
-                                <div class="text-[10px] text-slate-400 font-mono">PAGE LOAD SPEED</div>
-                            </div>
-                            <div>
-                                <div class="text-xl md:text-2xl font-black text-cyan-400">99.9%</div>
-                                <div class="text-[10px] text-slate-400 font-mono">CHECKOUT RELIABILITY</div>
-                            </div>
-                            <div>
-                                <div class="text-xl md:text-2xl font-black text-white">+42%</div>
-                                <div class="text-[10px] text-slate-400 font-mono">CONVERSION BOOST</div>
-                            </div>
-                        </div>
-
-                        <!-- Tech Tags -->
-                        <div class="flex flex-wrap gap-2 pt-2">
-                            <span
-                                class="text-[10px] font-mono border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 px-3 py-1 rounded-full">REACT</span>
-                            <span
-                                class="text-[10px] font-mono border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 px-3 py-1 rounded-full">PYTHON
-                                / DJANGO</span>
-                            <span
-                                class="text-[10px] font-mono border border-blue-500/30 bg-blue-500/10 text-blue-300 px-3 py-1 rounded-full">TAILWIND
-                                CSS</span>
-                            <span
-                                class="text-[10px] font-mono border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-full">STRIPE
-                                & PAYMENTS</span>
-                        </div>
-
-                        <!-- Action Links -->
-                        <div class="flex flex-wrap items-center gap-4 pt-2" onclick="event.stopPropagation()">
-                            <button onclick="openProjectModal('brialto')"
-                                class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-cyan-300 hover:text-white bg-cyan-500/20 border border-cyan-500/40 px-4 py-2 rounded-xl transition-all hover:bg-cyan-500/30">
-                                <span>Read Full Case Study</span>
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Right Thumbnail Frame -->
-                    <div class="md:col-span-5 relative overflow-hidden rounded-2xl border border-white/10 bg-[#050811]">
-                        <img src="https://share.google/6a6be5nMvcHAiwZcI" alt="Brialto E-Commerce Platform"
-                            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';"
-                            class="w-full h-64 md:h-80 object-cover group-hover:scale-108 transition-transform duration-700 opacity-90 group-hover:opacity-100">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-[#050811] via-transparent to-transparent pointer-events-none">
-                        </div>
-                        <div
-                            class="absolute bottom-3 left-3 text-[10px] font-mono text-slate-300 bg-[#090d1a]/90 border border-white/10 px-2.5 py-1 rounded-md backdrop-blur-md">
-                            PROJECT: BRIALTO E-COMMERCE
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Case Study 02: Academic Student Portal -->
-            <div class="glass-card rounded-3xl p-8 md:p-10 transition-all hover:scale-[1.01] hover:border-indigo-400/60 hover:shadow-[0_0_40px_rgba(139,92,246,0.2)] cursor-pointer group reveal-right relative"
-                onclick="openProjectModal('academic')">
-                <div
-                    class="absolute top-6 right-6 text-xs font-mono text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                    <span>Click for Details</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                    </svg>
-                </div>
-                <div class="grid md:grid-cols-12 gap-8 items-center">
-
-                    <!-- Left Thumbnail Frame -->
-                    <div
-                        class="md:col-span-5 order-2 md:order-1 relative overflow-hidden rounded-2xl border border-white/10 bg-[#050811]">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
-                            alt="Academic Student Portal"
-                            class="w-full h-64 md:h-80 object-cover group-hover:scale-108 transition-transform duration-700 opacity-90 group-hover:opacity-100">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-[#050811] via-transparent to-transparent pointer-events-none">
-                        </div>
-                        <div
-                            class="absolute bottom-3 left-3 text-[10px] font-mono text-slate-300 bg-[#090d1a]/90 border border-white/10 px-2.5 py-1 rounded-md backdrop-blur-md">
-                            SYSTEM: ACADEMIC_STUDENT_PORTAL
-                        </div>
-                    </div>
-
-                    <div class="md:col-span-7 order-1 md:order-2 space-y-6">
-                        <div class="flex items-center gap-3">
-                            <span
-                                class="mono text-xs text-indigo-400 font-bold bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full">CASE
-                                STUDY 02</span>
-                            <span class="text-xs text-cyan-400 font-mono">ENTERPRISE ACADEMIC PORTAL</span>
-                        </div>
-                        <h4 class="text-3xl font-bold text-white group-hover:text-indigo-300 transition-colors">
-                            University Student & Academic Management System</h4>
-                        <p class="text-slate-300 leading-relaxed text-sm font-light">
-                            Architected an end-to-end academic portal managing student enrollment, CGPA calculation
-                            engines, course registration queues, and fee payment tracking. Built with Django, MySQL, and
-                            customized responsive UI dashboards.
-                        </p>
-
-                        <!-- Metrics Row -->
-                        <div class="grid grid-cols-3 gap-4 pt-2 border-t border-white/10">
-                            <div>
-                                <div class="text-xl md:text-2xl font-black text-indigo-400">15,000+</div>
-                                <div class="text-[10px] text-slate-400 font-mono">ACTIVE STUDENTS</div>
-                            </div>
-                            <div>
-                                <div class="text-xl md:text-2xl font-black text-cyan-400">85%</div>
-                                <div class="text-[10px] text-slate-400 font-mono">ADMIN WORKLOAD SAVED</div>
-                            </div>
-                            <div>
-                                <div class="text-xl md:text-2xl font-black text-white">100%</div>
-                                <div class="text-[10px] text-slate-400 font-mono">GRADE AUDIT ACCURACY</div>
-                            </div>
-                        </div>
-
-                        <!-- Tech Tags -->
-                        <div class="flex flex-wrap gap-2 pt-2">
-                            <span
-                                class="text-[10px] font-mono border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 px-3 py-1 rounded-full">PYTHON</span>
-                            <span
-                                class="text-[10px] font-mono border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-full">DJANGO</span>
-                            <span
-                                class="text-[10px] font-mono border border-blue-500/30 bg-blue-500/10 text-blue-300 px-3 py-1 rounded-full">MYSQL</span>
-                            <span
-                                class="text-[10px] font-mono border border-purple-500/30 bg-purple-500/10 text-purple-300 px-3 py-1 rounded-full">JAVASCRIPT</span>
-                        </div>
-
-                        <!-- Project Links -->
-                        <div class="flex flex-wrap items-center gap-4 pt-2" onclick="event.stopPropagation()">
-                            <button onclick="openProjectModal('academic')"
-                                class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-indigo-300 hover:text-white bg-indigo-500/20 border border-indigo-500/40 px-4 py-2 rounded-xl transition-all hover:bg-indigo-500/30">
-                                <span>Read Full Case Study</span>
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Case Study 03: Autonomous AI Multi-Agent Swarm -->
-            <div class="glass-card rounded-3xl p-8 md:p-10 transition-all hover:scale-[1.01] hover:border-cyan-400/60 hover:shadow-[0_0_40px_rgba(0,240,255,0.2)] cursor-pointer group reveal-left relative"
-                onclick="openProjectModal('ai-swarm')">
-                <div
-                    class="absolute top-6 right-6 text-xs font-mono text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                    <span>Click for Details</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                    </svg>
-                </div>
-                <div class="grid md:grid-cols-12 gap-8 items-center">
-
-                    <div class="md:col-span-7 space-y-6">
-                        <div class="flex items-center gap-3">
-                            <span
-                                class="mono text-xs text-cyan-400 font-bold bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-full">CASE
-                                STUDY 03</span>
-                            <span class="text-xs text-emerald-400 font-mono">AXIOLAB AI DEPLOYMENT</span>
-                        </div>
-                        <h4 class="text-3xl font-bold text-white group-hover:text-cyan-300 transition-colors">Autonomous
-                            Multi-Agent Workflow Swarm</h4>
-                        <p class="text-slate-300 leading-relaxed text-sm font-light">
-                            Architected a dynamic multi-agent orchestration swarm that parses, validates, and structures
-                            incoming unstructured enterprise documents directly into operational databases with
-                            deterministic validation pipelines.
-                        </p>
-
-                        <!-- Metrics Row -->
-                        <div class="grid grid-cols-3 gap-4 pt-2 border-t border-white/10">
-                            <div>
-                                <div class="text-xl md:text-2xl font-black text-cyan-400">88%</div>
-                                <div class="text-[10px] text-slate-400 font-mono">MANUAL AUDIT SAVINGS</div>
-                            </div>
-                            <div>
-                                <div class="text-xl md:text-2xl font-black text-indigo-400">14.2x</div>
-                                <div class="text-[10px] text-slate-400 font-mono">THROUGHPUT MULTIPLIER</div>
-                            </div>
-                            <div>
-                                <div class="text-xl md:text-2xl font-black text-white">99.7%</div>
-                                <div class="text-[10px] text-slate-400 font-mono">EXTRACTION PRECISION</div>
-                            </div>
-                        </div>
-
-                        <!-- Tech Tags -->
-                        <div class="flex flex-wrap gap-2 pt-2">
-                            <span
-                                class="text-[10px] font-mono border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 px-3 py-1 rounded-full">PYTHON</span>
-                            <span
-                                class="text-[10px] font-mono border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-full">FASTAPI</span>
-                            <span
-                                class="text-[10px] font-mono border border-purple-500/30 bg-purple-500/10 text-purple-300 px-3 py-1 rounded-full">VECTOR
-                                SEARCH</span>
-                        </div>
-
-                        <!-- Project Links -->
-                        <div class="flex flex-wrap items-center gap-4 pt-2" onclick="event.stopPropagation()">
-                            <button onclick="openProjectModal('ai-swarm')"
-                                class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-cyan-300 hover:text-white bg-cyan-500/20 border border-cyan-500/40 px-4 py-2 rounded-xl transition-all hover:bg-cyan-500/30">
-                                <span>Read Full Case Study</span>
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Right Thumbnail Frame -->
-                    <div class="md:col-span-5 relative overflow-hidden rounded-2xl border border-white/10 bg-[#050811]">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"
-                            alt="AI Agent Workflow Mesh"
-                            class="w-full h-64 md:h-80 object-cover group-hover:scale-108 transition-transform duration-700 opacity-90 group-hover:opacity-100">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-[#050811] via-transparent to-transparent pointer-events-none">
-                        </div>
-                        <div
-                            class="absolute bottom-3 left-3 text-[10px] font-mono text-slate-300 bg-[#090d1a]/90 border border-white/10 px-2.5 py-1 rounded-md backdrop-blur-md">
-                            SYSTEM: MULTI_AGENT_NEURAL_SWARM
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Executive Track Record -->
-    <section id="achievements" class="py-24 bg-[#090d1a]/90 border-y border-white/5 relative z-10">
+    <!-- My Business: Axiolab Section -->
+    <section id="axiolab" class="py-20 border-y border-white/5 bg-slate-950/60 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="grid md:grid-cols-12 gap-10 items-center">
+                
+                <div class="md:col-span-5 space-y-4 slide-from-left">
+                    <div class="text-xs font-mono text-blue-400 uppercase tracking-widest font-semibold">ABOUT AXIOLAB STUDIO</div>
+                    <h2 class="text-2xl md:text-4xl font-extrabold text-white">How We Help Clients</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed font-light">
+                        <strong>Axiolab</strong> is my software development studio. We help founders and companies build full-stack web products, internal management portals, e-commerce applications, and tailored AI tools. We focus on clean code, strong security, and real business results.
+                    </p>
+                    <div class="pt-2">
+                        <a href="#contact" class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-blue-400 hover:text-blue-300 border-b border-blue-400/40 pb-1">
+                            <span>Discuss a project with Axiolab</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
 
-            <div class="text-center mb-16 reveal-up">
-                <h2 class="text-xs text-indigo-400 font-mono tracking-[0.3em] mb-3 uppercase">LEADERSHIP & METRICS</h2>
-                <h3 class="text-4xl font-black text-white">Track Record & Verified Impact</h3>
+                <div class="md:col-span-7 grid sm:grid-cols-2 gap-5 slide-from-right">
+                    
+                    <div class="p-6 rounded-2xl glass-card space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">Full-Stack Web Engineering</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Clean, responsive user interfaces backed by secure Python (Django/FastAPI) backend services and reliable APIs.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-card space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">AI & Automated Workflows</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Smart document parsing, AI assistant integration, and automated processing pipelines that save time.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-card space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">E-Commerce Platforms</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Custom storefronts, payment gateway integrations (Stripe, SSLCommerz), and inventory tracking systems.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-card space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">Database Optimization</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Well-structured MySQL and PostgreSQL schemas designed for data integrity, quick indexing, and low latency.</p>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="grid md:grid-cols-4 gap-6">
-                <div
-                    class="p-8 rounded-3xl bg-[#101628] border border-white/5 hover:border-cyan-500/40 transition-all text-center reveal-left">
-                    <div class="text-3xl font-black text-cyan-400 mb-2">AXIOLAB</div>
-                    <div class="text-xs font-mono text-slate-300 uppercase font-semibold mb-2">CEO & Founder</div>
-                    <p class="text-xs text-slate-400 leading-relaxed">Leading full-stack software development and
-                        autonomous AI architecture solutions for clients globally.</p>
-                </div>
+        </div>
+    </section>
 
-                <div
-                    class="p-8 rounded-3xl bg-[#101628] border border-white/5 hover:border-indigo-500/40 transition-all text-center reveal-up">
-                    <div class="text-4xl font-black text-indigo-400 mb-2">50+</div>
-                    <div class="text-xs font-mono text-slate-300 uppercase font-semibold mb-2">Web & AI Systems Built
+    <!-- Production Technology Stack -->
+    <section class="py-12 border-b border-white/5 bg-[#0b0f19] slide-from-left">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <span class="text-xs font-mono text-slate-400 uppercase tracking-widest block mb-5">Technologies & Frameworks I Work With</span>
+            
+            <div class="flex flex-wrap justify-center items-center gap-4 text-xs font-mono text-slate-300">
+                <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800/80 px-4 py-2.5 rounded-xl">
+                    <span class="text-yellow-400 font-bold">PY</span> Python
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800/80 px-4 py-2.5 rounded-xl">
+                    <span class="text-emerald-400 font-bold">DJ</span> Django
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800/80 px-4 py-2.5 rounded-xl">
+                    <span class="text-teal-400 font-bold">API</span> FastAPI
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800/80 px-4 py-2.5 rounded-xl">
+                    <span class="text-blue-400 font-bold">REACT</span> React.js
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800/80 px-4 py-2.5 rounded-xl">
+                    <span class="text-yellow-300 font-bold">JS</span> JavaScript (ES6+)
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800/80 px-4 py-2.5 rounded-xl">
+                    <span class="text-blue-300 font-bold">SQL</span> MySQL & PostgreSQL
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/80 border border-slate-800/80 px-4 py-2.5 rounded-xl">
+                    <span class="text-sky-400 font-bold">TW</span> Tailwind CSS
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive System Architecture Breakdown -->
+    <section id="architecture" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-10 slide-from-left">
+            <h2 class="text-xs text-blue-400 font-mono tracking-widest mb-1.5 uppercase">HOW I ENGINEER SOFTWARE</h2>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-white">Development & Architecture</h3>
+            <p class="text-slate-400 mt-2 max-w-xl mx-auto text-xs sm:text-sm">A clear look at how I structure codebases, database models, and workflow automations.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 md:p-8 slide-from-right">
+            <!-- Nav Tabs -->
+            <div class="flex flex-wrap gap-2.5 border-b border-white/10 pb-5 mb-8">
+                <button onclick="switchTab('tab-web')" id="btn-tab-web" class="arch-tab-btn active text-xs font-mono px-4 py-2.5 rounded-xl bg-blue-600 text-white font-semibold transition-all">
+                    1. Web Application Architecture
+                </button>
+                <button onclick="switchTab('tab-ai')" id="btn-tab-ai" class="arch-tab-btn text-xs font-mono px-4 py-2.5 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 transition-all">
+                    2. Intelligent AI Integration
+                </button>
+                <button onclick="switchTab('tab-db')" id="btn-tab-db" class="arch-tab-btn text-xs font-mono px-4 py-2.5 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 transition-all">
+                    3. Database & Query Performance
+                </button>
+            </div>
+
+            <!-- Tab Content 1: Web App Architecture -->
+            <div id="tab-web" class="arch-tab-content grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-white">Django & React Architecture</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed font-light">
+                        I build web apps with a clear separation between frontend interfaces and backend API services to ensure speed and easy maintainability.
+                    </p>
+                    <ul class="space-y-2.5 text-xs font-mono text-slate-300">
+                        <li class="flex items-center gap-2.5"><span class="text-blue-400">✓</span> Django REST Framework / FastAPI endpoints with secure token auth</li>
+                        <li class="flex items-center gap-2.5"><span class="text-blue-400">✓</span> Modular React components and responsive styling</li>
+                        <li class="flex items-center gap-2.5"><span class="text-blue-400">✓</span> Secure payment integration with Stripe and SSLCommerz</li>
+                        <li class="flex items-center gap-2.5"><span class="text-blue-400">✓</span> Lightweight state management and quick initial page loads</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 font-mono text-xs text-slate-300 space-y-3">
+                    <div class="text-slate-400 border-b border-slate-800 pb-3 flex justify-between">
+                        <span>WEB_SYSTEM_FLOW.md</span>
+                        <span class="text-emerald-400">STATUS: ACTIVE</span>
                     </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">Engineered scalable web applications, e-commerce
-                        engines, and AI automation pipelines.</p>
+                    <div class="text-slate-400">[React Frontend] ──(REST / JSON)──► [FastAPI / Django API]</div>
+                    <div class="pl-28 text-slate-400">│</div>
+                    <div class="pl-28 text-slate-400">├──► [ORM & Validation] ──► [PostgreSQL / MySQL]</div>
+                    <div class="pl-28 text-slate-400">└──► [Background Queue] ──► [Redis Cache]</div>
                 </div>
+            </div>
 
-                <div
-                    class="p-8 rounded-3xl bg-[#101628] border border-white/5 hover:border-cyan-500/40 transition-all text-center reveal-up">
-                    <div class="text-4xl font-black text-cyan-400 mb-2">99.9%</div>
-                    <div class="text-xs font-mono text-slate-300 uppercase font-semibold mb-2">System Reliability</div>
-                    <p class="text-xs text-slate-400 leading-relaxed">Deterministic database queries and fault-tolerant
-                        architecture across production systems.</p>
+            <!-- Tab Content 2: AI Workflows -->
+            <div id="tab-ai" class="arch-tab-content hidden grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-white">Intelligent Data Extraction Pipeline</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed font-light">
+                        Instead of unpredictable raw prompts, I build structured pipelines that extract data from multi-page PDFs, validate output schemas, and write structured records into databases.
+                    </p>
+                    <ul class="space-y-2.5 text-xs font-mono text-slate-300">
+                        <li class="flex items-center gap-2.5"><span class="text-indigo-400">✓</span> Automatic document scanning and key-value extraction</li>
+                        <li class="flex items-center gap-2.5"><span class="text-indigo-400">✓</span> Contextual document search using vector embeddings (RAG)</li>
+                        <li class="flex items-center gap-2.5"><span class="text-indigo-400">✓</span> Strict schema validation safeguards prior to saving</li>
+                    </ul>
                 </div>
+                <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 font-mono text-xs text-slate-300 space-y-3">
+                    <div class="text-slate-400 border-b border-slate-800 pb-3 flex justify-between">
+                        <span>DATA_PIPELINE.md</span>
+                        <span class="text-indigo-400">PIPELINE: READY</span>
+                    </div>
+                    <div class="text-slate-400">[Uploaded PDF File] ──► [Parsing Engine]</div>
+                    <div class="pl-20 text-slate-400">│</div>
+                    <div class="pl-20 text-slate-400">├──► [Extraction Agent] ──► [Schema Validator]</div>
+                    <div class="pl-20 text-slate-400">└──► [JSON Output] ──► [Relational Database]</div>
+                </div>
+            </div>
 
-                <div
-                    class="p-8 rounded-3xl bg-[#101628] border border-white/5 hover:border-indigo-500/40 transition-all text-center reveal-right">
-                    <div class="text-4xl font-black text-indigo-400 mb-2">10x</div>
-                    <div class="text-xs font-mono text-slate-300 uppercase font-semibold mb-2">Operational Speed</div>
-                    <p class="text-xs text-slate-400 leading-relaxed">Empowering clients by reducing operational
-                        friction with automated software pipelines.</p>
+            <!-- Tab Content 3: Database & Concurrency -->
+            <div id="tab-db" class="arch-tab-content hidden grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-white">Database Optimization & Query Speed</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed font-light">
+                        Data integrity comes first. I design relational database schemas that remain fast as records grow, using targeted indexes and efficient queries.
+                    </p>
+                    <ul class="space-y-2.5 text-xs font-mono text-slate-300">
+                        <li class="flex items-center gap-2.5"><span class="text-emerald-400">✓</span> Normalized relational tables and foreign keys</li>
+                        <li class="flex items-center gap-2.5"><span class="text-emerald-400">✓</span> Optimized query structures and targeted indexing</li>
+                        <li class="flex items-center gap-2.5"><span class="text-emerald-400">✓</span> Reliable transaction processing for store sales and analytics</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 font-mono text-xs text-slate-300 space-y-3">
+                    <div class="text-slate-400 border-b border-slate-800 pb-3 flex justify-between">
+                        <span>DATABASE_LOG.md</span>
+                        <span class="text-emerald-400">OPTIMIZED</span>
+                    </div>
+                    <div class="text-slate-400">Query Optimization Results:</div>
+                    <div class="text-emerald-400">&gt; Index added to [user_id, status, created_at]</div>
+                    <div class="text-slate-400">&gt; Query execution reduced from 380ms to 14ms</div>
+                    <div class="text-slate-400">&gt; Database connection pool: Healthy</div>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- Client Endorsements -->
-    <section id="testimonials" class="py-28 max-w-7xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-20 reveal-up">
-            <h2 class="text-xs text-cyan-400 font-mono tracking-[0.3em] mb-3 uppercase">CLIENT ENDORSEMENTS</h2>
-            <h3 class="text-4xl font-black text-white">What People Say</h3>
+    <!-- Selected Case Studies & Work -->
+    <section id="projects" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12 slide-from-left">
+            <h2 class="text-xs text-blue-400 font-mono tracking-widest mb-1.5 uppercase">CLIENT & PRODUCT HIGHLIGHTS</h2>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-white">Featured Work</h3>
+            <p class="text-slate-400 mt-2 max-w-xl mx-auto text-xs sm:text-sm">Here are a few real-world systems, stores, and tools I have engineered recently.</p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="glass-card p-8 md:p-10 rounded-3xl space-y-6 reveal-left">
-                <div class="text-cyan-400 text-3xl font-serif">“</div>
-                <p class="text-slate-300 italic text-sm leading-relaxed">
-                    "Ishmam architected our full e-commerce backend and student management portals with exceptional
-                    precision. His ability to handle complex Python/Django database structures while integrating modern
-                    AI workflows is top-tier."
-                </p>
-                <div class="flex items-center gap-4 pt-4 border-t border-white/10">
-                    <div
-                        class="w-10 h-10 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 font-bold text-xs">
-                        CTO
+        <div class="space-y-10">
+
+            <!-- Project 01: Brialto -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 border border-white/10 transition-all hover:border-blue-500/40 slide-from-left">
+                <div class="grid md:grid-cols-12 gap-8 items-center">
+                    <div class="md:col-span-7 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+                            E-Commerce Storefront
+                        </div>
+                        <h4 class="text-xl md:text-2xl font-bold text-white">Brialto — Custom E-Commerce Platform</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed font-light">
+                            Designed and built Brialto, a fast e-commerce platform with custom product catalog management, instant search, responsive mobile UI, and secure payment processing.
+                        </p>
+                        
+                        <!-- Tech Tags -->
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">React</span>
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">Python / Django</span>
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">Tailwind CSS</span>
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">Stripe API</span>
+                        </div>
+
+                        <div class="pt-2">
+                            <button onclick="openProjectModal('brialto')" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-xl transition-colors">
+                                View Technical Details →
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <div class="font-bold text-white text-sm">VP of Software Development</div>
-                        <div class="text-xs text-slate-400 font-mono">Enterprise SaaS Partner</div>
+
+                    <!-- Clickable Image Preview Link -->
+                    <div class="md:col-span-5">
+                        <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" title="Open Brialto Project Preview" class="group relative block rounded-xl overflow-hidden border border-slate-800 aspect-video bg-slate-950 shadow-md">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Brialto E-Commerce Preview" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent flex flex-col justify-end p-4">
+                                <div class="flex items-center justify-between text-xs font-mono text-white font-medium">
+                                    <span>Brialto Storefront</span>
+                                    <span class="text-blue-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">Live Demo ↗</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <div class="glass-card p-8 md:p-10 rounded-3xl space-y-6 reveal-right">
-                <div class="text-indigo-400 text-3xl font-serif">“</div>
-                <p class="text-slate-300 italic text-sm leading-relaxed">
-                    "Ishmam Ayon brings rare balance: deep foundational web development expertise combined with
-                    high-level AI orchestration. As CEO of Axiolab, he consistently delivers production systems that
-                    scale."
-                </p>
-                <div class="flex items-center gap-4 pt-4 border-t border-white/10">
-                    <div
-                        class="w-10 h-10 rounded-full bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-300 font-bold text-xs">
-                        CEO
+            <!-- Project 02: Academic Portal -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 border border-white/10 transition-all hover:border-blue-500/40 slide-from-right">
+                <div class="grid md:grid-cols-12 gap-8 items-center">
+                    <div class="md:col-span-7 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-mono">
+                            Web Application
+                        </div>
+                        <h4 class="text-xl md:text-2xl font-bold text-white">Academic & Student Management Portal</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed font-light">
+                            Built a comprehensive academic management system that handles student enrollment, course registrations, automatic CGPA calculations, and grade administration.
+                        </p>
+                        
+                        <!-- Tech Tags -->
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">Python</span>
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">Django</span>
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">MySQL</span>
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">JavaScript</span>
+                        </div>
+
+                        <div class="pt-2">
+                            <button onclick="openProjectModal('academic')" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-xl transition-colors">
+                                View Technical Details →
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <div class="font-bold text-white text-sm">Tech Managing Director</div>
-                        <div class="text-xs text-slate-400 font-mono">Global Digital Ecosystems</div>
+
+                    <!-- Clickable Image Preview Link -->
+                    <div class="md:col-span-5">
+                        <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" title="Open Academic Portal Preview" class="group relative block rounded-xl overflow-hidden border border-slate-800 aspect-video bg-slate-950 shadow-md">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Academic Portal Preview" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent flex flex-col justify-end p-4">
+                                <div class="flex items-center justify-between text-xs font-mono text-white font-medium">
+                                    <span>Academic Portal UI</span>
+                                    <span class="text-indigo-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">Explore Code ↗</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
+                </div>
+            </div>
+
+            <!-- Project 03: Multi-Agent AI -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 border border-white/10 transition-all hover:border-blue-500/40 slide-from-left">
+                <div class="grid md:grid-cols-12 gap-8 items-center">
+                    <div class="md:col-span-7 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono">
+                            Automation & AI
+                        </div>
+                        <h4 class="text-xl md:text-2xl font-bold text-white">Document Data Extraction Pipeline</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed font-light">
+                            Created an automated document parsing tool that converts unstructured multi-page PDFs into verified JSON data for easy ingestion into SQL databases.
+                        </p>
+                        
+                        <!-- Tech Tags -->
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">Python</span>
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">FastAPI</span>
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">Vector DB</span>
+                            <span class="text-[11px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-3 py-1 rounded-md">PostgreSQL</span>
+                        </div>
+
+                        <div class="pt-2">
+                            <button onclick="openProjectModal('ai-swarm')" class="inline-flex items-center gap-2 text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-xl transition-colors">
+                                View Technical Details →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Clickable Image Preview Link -->
+                    <div class="md:col-span-5">
+                        <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" title="Open AI Pipeline Preview" class="group relative block rounded-xl overflow-hidden border border-slate-800 aspect-video bg-slate-950 shadow-md">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Document Parsing AI Pipeline Preview" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent flex flex-col justify-end p-4">
+                                <div class="flex items-center justify-between text-xs font-mono text-white font-medium">
+                                    <span>AI Extraction Pipeline</span>
+                                    <span class="text-cyan-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">View Project ↗</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Professional Experience & Impact -->
+    <section class="py-16 bg-slate-950/80 border-y border-white/5 slide-from-right">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div class="space-y-2">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white">Founder</div>
+                    <div class="text-xs font-mono text-blue-400 uppercase">Axiolab Studio</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Leading custom development projects from design to deployment.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white">50+</div>
+                    <div class="text-xs font-mono text-blue-400 uppercase">Systems & Modules Built</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Delivered web applications, e-commerce stores, and automation tools.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white">Full-Stack</div>
+                    <div class="text-xs font-mono text-blue-400 uppercase">Core Capability</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Experienced across frontend UI, Python APIs, and database engineering.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white">Quality</div>
+                    <div class="text-xs font-mono text-blue-400 uppercase">First</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Focus on reliability, clean code standards, and long-term maintainability.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-28 bg-[#050811] border-t border-white/5 relative z-10">
-        <div class="max-w-3xl mx-auto px-6 text-center reveal-up">
-            <span class="text-xs font-mono text-cyan-400 tracking-[0.3em] uppercase mb-3 inline-block">// INITIATE
-                CONNECTION</span>
-            <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Let's Build the Future</h2>
-            <p class="text-slate-300 text-base mb-12 max-w-xl mx-auto">
-                Need high-concurrency web platforms, custom Django enterprise applications, or automated AI swarms?
-                Direct executive line open.
+    <section id="contact" class="py-20 max-w-4xl mx-auto px-6 slide-from-left">
+        <div class="text-center mb-10">
+            <span class="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-1.5">GET IN TOUCH</span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-white">Let's Work Together</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-2 max-w-lg mx-auto">
+                Have a project in mind, need technical help, or want to work with Axiolab? Send a message directly or reach out via social media platforms below.
             </p>
+        </div>
 
-            <div class="glass-card rounded-3xl p-8 md:p-12 text-left space-y-6 shadow-2xl">
-                <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+        <!-- Contact Form (Placed First) -->
+        <div class="glass-card rounded-2xl p-6 md:p-8 border border-white/10 shadow-2xl mb-10">
+                <!-- FormSubmit Configuration -->
+                <input type="hidden" name="_subject" value="New Portfolio Inquiry for Ishmam Ayon">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+
+                <div class="grid sm:grid-cols-2 gap-5">
                     <div>
-                        <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Name / Organization</label>
-                        <input type="text" name="name" required placeholder="e.g. Alex Vance, CTO"
-                            class="w-full bg-[#050811] border border-slate-800 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm">
+                        <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Your Name</label>
+                        <input type="text" name="name" required placeholder="e.g. Alex Vance" 
+                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Email Address</label>
-                        <input type="email" name="email" required placeholder="alex@company.com"
-                            class="w-full bg-[#050811] border border-slate-800 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm">
+                        <input type="email" name="email" required placeholder="alex@company.com" 
+                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 text-sm">
                     </div>
-                    <div>
-                        <label class="block text-xs font-mono uppercase text-slate-300 mb-2">System Specs / Project
-                            Challenge</label>
-                        <textarea name="message" rows="4" required
-                            placeholder="Describe your web application, Python backend, or AI automation project..."
-                            class="w-full bg-[#050811] border border-slate-800 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors text-sm"></textarea>
-                    </div>
+                </div>
 
-                    <button type="submit"
-                        class="w-full bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-cyan-500/25 text-sm uppercase tracking-widest font-mono flex items-center justify-center gap-2 disabled:opacity-50">
-                        <span>Transmit Message &rarr;</span>
-                    </button>
+                <div>
+                    <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Project Details / Message</label>
+                    <textarea name="message" rows="4" required placeholder="Describe your web project, software needs, or inquiry..." 
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 text-sm"></textarea>
+                </div>
 
-                    <div id="form-status" class="hidden p-4 rounded-xl text-xs font-mono text-center"></div>
-                </form>
+                <button type="submit" 
+                    class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-blue-600/20 text-sm font-mono flex items-center justify-center gap-2">
+                    <span>Send Message Directly →</span>
+                </button>
+
+                <div id="form-status" class="hidden p-4 rounded-xl text-xs font-mono text-center"></div>
+            </form>
+        </div>
+
+        <!-- Media Platform Direct Contact Links (ONLY Standalone Logos, No Background Box) -->
+        <div class="text-center space-y-4">
+            <div class="text-xs font-mono text-slate-400 uppercase tracking-widest">Or connect directly via platforms</div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-6 pt-2">
+                <!-- GitHub Logo Only -->
+                <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" title="GitHub Profile (@Ishmamayon)" 
+                   class="text-white p-1">
+                    <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                </a>
+
+                <!-- LinkedIn Logo Only -->
+                <a href="https://www.linkedin.com/in/ishmam-ayon-681759426/" target="_blank" rel="noopener" title="LinkedIn Profile (Ishmam Ayon)" 
+                   class="text-[#0A66C2] p-1">
+                    <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.762-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+
+                <!-- WhatsApp Logo Only -->
+                <a href="https://wa.me/8801815491588" target="_blank" rel="noopener" title="WhatsApp Chat (+880 1815-491588)" 
+                   class="text-[#25D366] p-1">
+                    <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                    </svg>
+                </a>
+
+                <!-- Facebook Logo Only -->
+                <a href="https://www.facebook.com/ishmam64" target="_blank" rel="noopener" title="Facebook Profile (ishmam64)" 
+                   class="text-[#1877F2] p-1">
+                    <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+
+                <!-- Direct Phone Logo Only -->
+                <a href="tel:01815491588" title="Call Directly (01815491588)" 
+                   class="text-cyan-400 p-1">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                </a>
+
+                <!-- Direct Email Logo Only -->
+                <a href="mailto:ayondesigns6@gmail.com" title="Send Email (ayondesigns6@gmail.com)" 
+                   class="text-rose-400 p-1">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Telemetry Status Bar -->
-    <div
-        class="fixed bottom-4 left-4 z-40 hidden lg:flex items-center gap-3 bg-[#090d1a]/95 border border-cyan-500/30 px-4 py-2.5 rounded-2xl backdrop-blur-xl shadow-2xl text-[11px] font-mono">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-        <span class="text-slate-400">TELEMETRY:</span>
-        <span id="telemetry-log" class="text-cyan-300">[0.04s] Django ORM & Swarm Active (MySQL Node)</span>
-    </div>
-
-    <!-- Interactive Case Study Modal -->
-    <div id="project-modal"
-        class="fixed inset-0 z-[110] bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 transition-all opacity-0">
-        <div
-            class="bg-[#090d1a] border border-cyan-500/30 rounded-3xl max-w-2xl w-full p-6 md:p-8 relative shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
-            <button onclick="closeProjectModal()"
-                class="absolute top-6 right-6 text-slate-400 hover:text-white p-2 rounded-full bg-[#101628] border border-white/10 text-xs font-mono">✕
-                CLOSE</button>
-            <div id="modal-content" class="space-y-4">
-                <!-- Dynamically injected project specs -->
-            </div>
+    <!-- Case Study Details Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 relative shadow-2xl space-y-4">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-sm font-mono bg-slate-800 px-2.5 py-1 rounded-md">✕</button>
+            <div id="modal-content"></div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer
-        class="py-12 text-center text-slate-500 text-xs font-mono tracking-widest border-t border-white/5 relative z-10 bg-[#050811]">
-        &copy; 2026 ISHMAM AYON // CEO @ AXIOLAB &bull; ALL RIGHTS RESERVED
+    <footer class="py-10 text-center text-slate-500 text-xs font-mono border-t border-white/5">
+        <div>&copy; 2026 Ishmam Ayon. All rights reserved. Founder & CEO @ Axiolab.</div>
     </footer>
 
+    <!-- JavaScript Interactions -->
     <script>
-        /* Responsive Background Neural Canvas */
-        const canvas = document.getElementById('neural-canvas');
-        const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+        // Scroll Slide Observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -60px 0px',
+                threshold: 0.1
+            };
 
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            }, 150);
-        });
-
-        const nodes = [];
-        const nodeCount = Math.min(Math.floor(width / 25), 45);
-
-        for (let i = 0; i < nodeCount; i++) {
-            nodes.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.7,
-                vy: (Math.random() - 0.5) * 0.7,
-                radius: Math.random() * 2 + 1.5
-            });
-        }
-
-        /* Mouse tracking for spotlight effect */
-        window.addEventListener('mousemove', (e) => {
-            document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
-            document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
-        });
-
-        function triggerCanvasPulse() {
-            nodes.forEach(node => {
-                node.vx += (Math.random() - 0.5) * 4;
-                node.vy += (Math.random() - 0.5) * 4;
-            });
-            updateTelemetry("[PULSE] Data emission burst triggered by user");
-        }
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, width, height);
-
-            nodes.forEach((node, i) => {
-                node.x += node.vx;
-                node.y += node.vy;
-
-                if (node.x < 0 || node.x > width) node.vx *= -1;
-                if (node.y < 0 || node.y > height) node.vy *= -1;
-
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(0, 240, 255, 0.7)';
-                ctx.fill();
-
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const other = nodes[j];
-                    const dist = Math.hypot(node.x - other.x, node.y - other.y);
-                    if (dist < 140) {
-                        ctx.beginPath();
-                        ctx.moveTo(node.x, node.y);
-                        ctx.lineTo(other.x, other.y);
-                        ctx.strokeStyle = `rgba(0, 240, 255, ${1 - dist / 140 * 0.7})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
+            const slideObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('slide-in-visible');
                     }
-                }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.slide-from-left, .slide-from-right').forEach(el => {
+                slideObserver.observe(el);
+            });
+        });
+
+        // Typewriter Effect for Hero Headline
+        const typewriterPhrases = [
+            "Ishmam Ayon",
+            "CEO of Axiolab",
+            "a Software Engineer"
+        ];
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = typewriterPhrases[phraseIdx];
+            const textEl = document.getElementById('typewriter-text');
+            
+            if (!textEl) return;
+
+            if (isDeleting) {
+                charIdx--;
+                textEl.textContent = currentPhrase.substring(0, charIdx);
+            } else {
+                charIdx++;
+                textEl.textContent = currentPhrase.substring(0, charIdx);
+            }
+
+            let typingSpeed = isDeleting ? 45 : 95;
+
+            if (!isDeleting && charIdx === currentPhrase.length) {
+                typingSpeed = 2200; // Pause when full word is typed
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % typewriterPhrases.length;
+                typingSpeed = 400; // Pause before typing next word
+            }
+
+            setTimeout(typeEffect, typingSpeed);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', typeEffect);
+        } else {
+            typeEffect();
+        }
+
+        // Tab Switcher for Engineering Architecture Section
+        function switchTab(tabId) {
+            document.querySelectorAll('.arch-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.arch-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-slate-900', 'text-slate-300', 'border-slate-800');
             });
 
-            requestAnimationFrame(animateCanvas);
-        }
-        animateCanvas();
-
-        /* Dynamic Telemetry Log Rotation */
-        const telemetryLogs = [
-            "[0.04s] Django ORM & Swarm Active (MySQL Node)",
-            "[0.02s] PostgreSQL Connection Pool: Healthy",
-            "[0.10s] Multi-LLM Router -> searching...",
-            "[0.08s] MySQL Query cached (Latency: 0.12ms)",
-            "[0.01s] Token throughput: 4,820 t/s"
-        ];
-        let telemetryIdx = 0;
-        function updateTelemetry(msg) {
-            const el = document.getElementById('telemetry-log');
-            if (el) el.innerText = msg || telemetryLogs[telemetryIdx % telemetryLogs.length];
-        }
-        setInterval(() => {
-            telemetryIdx++;
-            updateTelemetry();
-        }, 3500);
-
-        /* Architect Mode Toggle */
-        function toggleArchitectMode() {
-            document.body.classList.toggle('architect-mode');
-            const isMode = document.body.classList.contains('architect-mode');
-            document.getElementById('mode-text').innerText = isMode ? 'ARCHITECT: ON' : 'ARCHITECT: OFF';
-            document.getElementById('mode-dot').className = isMode ? 'w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping' : 'w-1.5 h-1.5 rounded-full bg-slate-500';
-            updateTelemetry(isMode ? "[MODE] Architect Schematic Mode Engaged" : "[MODE] Executive View Restored");
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.add('bg-blue-600', 'text-white');
+            activeBtn.classList.remove('bg-slate-900', 'text-slate-300', 'border-slate-800');
         }
 
-        /* Simulation Execution Engine */
-        function runSimulation() {
-            const payload = document.getElementById('sim-payload').value;
-            const strategy = document.getElementById('sim-strategy').value;
-            const logBox = document.getElementById('sim-log');
-            const statusBox = document.getElementById('sim-status');
-
-            statusBox.innerText = "RUNNING...";
-            statusBox.className = "text-xs text-yellow-400 animate-pulse font-bold";
-            logBox.innerHTML = `<div>&gt; Initializing simulation payload [${payload}]...</div>`;
-
-            setTimeout(() => {
-                logBox.innerHTML += `<div class="text-cyan-400">&gt; Routing through ${strategy} execution engine...</div>`;
-            }, 400);
-
-            setTimeout(() => {
-                logBox.innerHTML += `<div class="text-indigo-400">&gt; Database transaction & cache validation complete (Latency: 14ms)</div>`;
-            }, 800);
-
-            setTimeout(() => {
-                logBox.innerHTML += `<div class="text-emerald-400">&gt; SUCCESS: 100% payload executed in 0.08s (Zero loss)</div>`;
-                statusBox.innerText = "COMPLETED";
-                statusBox.className = "text-xs text-emerald-400 font-bold";
-            }, 1300);
+        // Mobile Drawer Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
         }
 
-        /* Serverless Contact Form Submission Handler */
+        // Project Modal Controller
+        const projectDetails = {
+            'brialto': {
+                title: 'Brialto E-Commerce Architecture',
+                desc: 'Brialto was engineered to provide high rendering performance for shoppers while giving administrators a clear backend overview of inventory and sales. Built with Django REST Framework on the backend and React on the frontend.',
+                highlights: [
+                    'Sub-second page rendering using optimized frontend asset loading',
+                    'Integrated secure credit card payments via Stripe API',
+                    'Custom Django admin hooks for rapid stock updates'
+                ]
+            },
+            'academic': {
+                title: 'Academic Portal Engineering',
+                desc: 'Designed for high concurrency during semester registration windows. The system automates grade point calculations and structures complex relationships between departments, courses, students, and billing records.',
+                highlights: [
+                    'Handles enrollment workflows for over 15,000 active student records',
+                    'Optimized MySQL indexes to maintain low latency during registration peaks',
+                    'Automated CGPA computation engine replacing manual transcript entries'
+                ]
+            },
+            'ai-swarm': {
+                title: 'Multi-Agent Extraction Pipeline',
+                desc: 'An automated backend processing system built to reduce manual data entry from incoming unstructured document files.',
+                highlights: [
+                    'Multi-stage parsing: Layout Analysis -> Data Extraction -> Schema Validation',
+                    'Integrates vector similarity search to match extracted terms against standardized database records',
+                    'Built with Python and FastAPI for high processing throughput'
+                ]
+            }
+        };
+
+        function openProjectModal(key) {
+            const data = projectDetails[key];
+            if (!data) return;
+            
+            const modal = document.getElementById('project-modal');
+            const content = document.getElementById('modal-content');
+
+            content.innerHTML = `
+                <h3 class="text-xl font-bold text-white mb-2">${data.title}</h3>
+                <p class="text-slate-300 text-xs leading-relaxed mb-4">${data.desc}</p>
+                <div class="text-xs font-mono text-blue-400 mb-2 uppercase font-semibold">Technical Highlights:</div>
+                <ul class="space-y-2 text-xs font-mono text-slate-300">
+                    ${data.highlights.map(h => `<li class="flex items-start gap-2"><span class="text-blue-400">►</span> <span>${h}</span></li>`).join('')}
+                </ul>
+            `;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Form Submission Handler (FormSubmit integration with Mailto Fallback)
         async function handleFormSubmit(e) {
             e.preventDefault();
             const form = e.target;
             const submitBtn = form.querySelector('button[type="submit"]');
             const statusDiv = document.getElementById('form-status');
-            const originalBtnText = submitBtn.innerHTML;
+            const originalText = submitBtn.innerHTML;
 
-            const name = form.querySelector('input[name="name"]').value;
-            const email = form.querySelector('input[name="email"]').value;
-            const message = form.querySelector('textarea[name="message"]').value;
-
-            // UI Loading state
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<span>TRANSMITTING TELEMETRY...</span>`;
+            submitBtn.innerHTML = `<span>Sending Message...</span>`;
             statusDiv.classList.add('hidden');
 
             try {
@@ -1131,168 +890,33 @@
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        message: message,
-                        _subject: `[AXIOLAB INQUIRY] New Client Project Challenge from ${name}`,
-                        _template: "table"
+                        name: form.name.value,
+                        email: form.email.value,
+                        message: form.message.value,
+                        _subject: `[Portfolio Contact] Message from ${form.name.value}`
                     })
                 });
 
                 if (response.ok) {
                     statusDiv.className = "p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-xs font-mono text-center block";
-                    statusDiv.innerHTML = "✔ Message transmitted successfully to <b>ayondesigns6@gmail.com</b>. Ishmam Ayon will evaluate your specs shortly.";
+                    statusDiv.innerHTML = "✔ Your message was sent successfully! Ishmam will reply to your email shortly.";
                     form.reset();
-                    updateTelemetry("[MESSAGE SENT] Incoming client dispatch routed to executive inbox");
                 } else {
-                    throw new Error("Transmission failed");
+                    throw new Error("FormSubmit AJAX issue");
                 }
             } catch (err) {
-                statusDiv.className = "p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-xs font-mono text-center block";
-                statusDiv.innerHTML = "✖ Transmission error. Please email directly at <a href='mailto:ayondesigns6@gmail.com' class='underline font-bold'>ayondesigns6@gmail.com</a>.";
+                // Smooth fallback if AJAX is blocked by client adblockers or network filters
+                statusDiv.className = "p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl text-yellow-300 text-xs font-mono text-center block space-y-2";
+                statusDiv.innerHTML = `
+                    <div>Unable to submit via background service. Opening direct mail client...</div>
+                    <a href="mailto:ayondesigns6@gmail.com?subject=Inquiry from ${encodeURIComponent(form.name.value)}&body=${encodeURIComponent(form.message.value)}" class="inline-block mt-2 px-4 py-2 bg-yellow-500/20 text-yellow-200 border border-yellow-500/40 rounded-lg hover:bg-yellow-500/30 transition-colors">Click here to send email directly →</a>
+                `;
+                window.location.href = `mailto:ayondesigns6@gmail.com?subject=Inquiry from ${encodeURIComponent(form.name.value)}&body=${encodeURIComponent(form.message.value)}`;
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
+                submitBtn.innerHTML = originalText;
             }
         }
-
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        }
-
-        /* Intersection Observer for Smooth Slide Reveals */
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -20px 0px"
-        };
-
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up').forEach(el => {
-            revealObserver.observe(el);
-        });
-
-        /* Interactive Case Study Modal Controller */
-        const projectData = {
-            'brialto': {
-                badge: 'FEATURED PROJECT // E-COMMERCE',
-                title: 'Brialto — Next-Gen E-Commerce & Retail Experience',
-                img: 'https://cdn.dribbble.com/userupload/9000434/file/original-903fac30a0a944a36dcfaeb29e373619.png?format=webp&resize=400x300&vertical=center',
-                desc: 'Brialto is a modern headless e-commerce store built to deliver ultra-fast shopping experiences across web and mobile browsers. Key highlights include sub-second product searching, seamless payment gateway integrations (Stripe, SSLCommerz), real-time stock inventory synchronization, and an intuitive customer order tracking dashboard.',
-                tech: ['React', 'Python / Django', 'Tailwind CSS', 'Stripe Payments', 'PostgreSQL'],
-                metrics: [
-                    { val: '<1.2s', label: 'Page Load Speed' },
-                    { val: '99.9%', label: 'Checkout Uptime' },
-                    { val: '+42%', label: 'Conversion Lift' }
-                ]
-            },
-            'academic': {
-                badge: 'ENTERPRISE SYSTEM // EDUCATION',
-                title: 'University Student & Academic Management Portal',
-                img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-                desc: 'An end-to-end academic portal managing student admissions, course registration, automated CGPA calculations, and fee collection tracking for over 15,000 active students.',
-                tech: ['Python', 'Django Framework', 'MySQL', 'JavaScript', 'Tailwind CSS'],
-                metrics: [
-                    { val: '15,000+', label: 'Active Students' },
-                    { val: '85%', label: 'Admin Time Saved' },
-                    { val: '100%', label: 'Audit Accuracy' }
-                ]
-            },
-            'ai-swarm': {
-                badge: 'AI DEPLOYMENT // MULTI-AGENT',
-                title: 'Autonomous Multi-Agent Workflow Swarm',
-                img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
-                desc: 'An intelligent multi-agent AI orchestration pipeline that parses unstructured corporate documents and structures extracted entities directly into relational databases.',
-                tech: ['Python', 'FastAPI', 'Vector Search', 'Multi-Agent Swarm', 'PostgreSQL'],
-                metrics: [
-                    { val: '88%', label: 'Manual Savings' },
-                    { val: '14.2x', label: 'Throughput' },
-                    { val: '99.7%', label: 'Extraction Precision' }
-                ]
-            }
-        };
-
-        function openProjectModal(key) {
-            const data = projectData[key];
-            if (!data) return;
-            const modal = document.getElementById('project-modal');
-            const content = document.getElementById('modal-content');
-
-            content.innerHTML = `
-                <div class="text-[10px] font-mono text-cyan-400 uppercase tracking-widest">${data.badge}</div>
-                <h3 class="text-2xl font-bold text-white">${data.title}</h3>
-                <div class="overflow-hidden rounded-2xl border border-white/10 max-h-60 bg-[#050811]">
-                    <img src="${data.img}" alt="${data.title}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';" class="w-full h-full object-cover">
-                </div>
-                <p class="text-slate-300 text-sm leading-relaxed">${data.desc}</p>
-                <div class="grid grid-cols-3 gap-3 py-3 border-y border-white/10">
-                    ${data.metrics.map(m => `
-                        <div class="text-center">
-                            <div class="text-lg font-black text-cyan-400">${m.val}</div>
-                            <div class="text-[9px] font-mono text-slate-400 uppercase">${m.label}</div>
-                        </div>
-                    `).join('')}
-                </div>
-                <div class="flex flex-wrap gap-2 pt-1">
-                    ${data.tech.map(t => `<span class="text-[10px] font-mono border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 px-3 py-1 rounded-full">${t}</span>`).join('')}
-                </div>
-            `;
-
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-            }, 10);
-        }
-
-        function closeProjectModal() {
-            const modal = document.getElementById('project-modal');
-            modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        /* Cybernetic Preloader Sequence */
-        window.addEventListener('DOMContentLoaded', () => {
-            const preloader = document.getElementById('preloader');
-            const loaderBar = document.getElementById('loader-bar');
-            const loaderStatus = document.getElementById('loader-status');
-            const loaderPercent = document.getElementById('loader-percent');
-
-            const steps = [
-                { progress: 25, label: "LOADING NEURAL MESH..." },
-                { progress: 60, label: "MOUNTING CORE MODULES..." },
-                { progress: 85, label: "ESTABLISHING SYSTEM LINK..." },
-                { progress: 100, label: "SYSTEM ONLINE" }
-            ];
-
-            let stepIdx = 0;
-
-            const interval = setInterval(() => {
-                if (stepIdx < steps.length) {
-                    const step = steps[stepIdx];
-                    loaderBar.style.width = step.progress + '%';
-                    loaderPercent.textContent = step.progress + '%';
-                    loaderStatus.textContent = step.label;
-                    stepIdx++;
-                } else {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        preloader.classList.add('opacity-0', 'pointer-events-none');
-                        setTimeout(() => {
-                            preloader.remove();
-                        }, 700);
-                    }, 300);
-                }
-            }, 300);
-        });
     </script>
 </body>
 
