@@ -96,7 +96,7 @@
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
 
-        /* Refined glassmorphism card styling */
+        /* Glassmorphism card styling */
         .glass-card {
             background: rgba(22, 30, 49, 0.7);
             backdrop-filter: blur(12px);
@@ -138,10 +138,10 @@
         .ide-cursor {
             display: inline-block;
             width: 8px;
-            height: 1.2em;
+            height: 1.1em;
             background-color: #3b82f6;
             vertical-align: text-bottom;
-            animation: blink 1s step-end infinite;
+            animation: blink 0.8s step-end infinite;
         }
 
         @keyframes blink {
@@ -156,6 +156,34 @@
         }
         .toast-show {
             transform: translateY(0);
+        }
+
+        /* Infinite Marquee for Tech Stack */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes marquee-reverse {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0%); }
+        }
+
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 35s linear infinite;
+        }
+
+        .animate-marquee-reverse {
+            display: flex;
+            width: max-content;
+            animation: marquee-reverse 35s linear infinite;
+        }
+
+        .marquee-container:hover .animate-marquee,
+        .marquee-container:hover .animate-marquee-reverse {
+            animation-play-state: paused;
         }
 
         /* Custom scrollbar */
@@ -180,7 +208,6 @@
     <!-- Accessibility Skip Link -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-lg z-[200] shadow-xl">Skip to main content</a>
 
-    <!-- IDE Splash Intro -->
     <div id="ide-intro" class="fixed inset-0 z-[100] bg-[#020617] flex items-center justify-center transition-all duration-700 ease-in-out">
         <div id="ide-window" class="w-11/12 max-w-2xl bg-[#0b0f19] rounded-xl border border-slate-800 shadow-2xl shadow-blue-500/10 overflow-hidden transform transition-all duration-500 ease-out">
             <div class="h-9 bg-slate-900 border-b border-slate-800 flex items-center px-4 justify-between">
@@ -196,7 +223,7 @@
         </div>
     </div>
 
-    <!-- Script to prevent FOUC / Handle initial load state immediately -->
+    <!-- Script to prevent FOUC -->
     <script>
         if (sessionStorage.getItem('introPlayed') === 'true') {
             document.getElementById('ide-intro').style.display = 'none';
@@ -205,7 +232,6 @@
         }
     </script>
 
-    <!-- Header Navigation -->
     <header class="fixed top-0 left-0 right-0 z-40 bg-[#0b0f19]/85 backdrop-blur-md border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             
@@ -252,22 +278,15 @@
     </header>
 
     <main id="main-content">
-        <!-- Hero Section -->
-        <section id="home" class="pt-24 md:pt-32 pb-12 md:pb-16 px-6 max-w-7xl mx-auto flex items-center">
-            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 w-full">
+        <section id="home" class="pt-24 md:pt-36 pb-12 md:pb-20 px-6 max-w-7xl mx-auto flex items-center">
+            <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 w-full">
                 
-                <!-- Profile Circular Image (Top on Mobile, Right on Desktop) -->
+                <!-- Clean Borderless Profile Image -->
                 <div class="w-full md:w-auto flex justify-center order-1 md:order-2 slide-from-right">
-                    <div class="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-[280px] lg:h-[280px] rounded-full p-1 bg-gradient-to-tr from-blue-500 via-indigo-500 to-cyan-400 shadow-2xl shadow-blue-500/20">
-                        <div class="w-full h-full rounded-full bg-slate-900 overflow-hidden border-4 border-[#0b0f19]">
-                            <img src="profile.png" alt="Ishmam Ayon" 
-                                 onerror="this.onerror=null; this.src='https://i.postimg.cc/14xxMtSk/profile.png';"
-                                 class="w-full h-full object-cover object-top">
-                        </div>
-                        <!-- Status indicator dot -->
-                        <div class="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 w-6 h-6 sm:w-8 sm:h-8 bg-[#0b0f19] rounded-full flex items-center justify-center shadow-lg border border-white/10" title="Open for Work">
-                            <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-emerald-400 animate-pulse"></div>
-                        </div>
+                    <div class="relative w-48 h-48 sm:w-60 sm:h-60 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-2xl shadow-blue-500/10">
+                        <img src="profile.png" alt="Ishmam Ayon" 
+                             onerror="this.onerror=null; this.src='https://i.postimg.cc/14xxMtSk/profile.png';"
+                             class="w-full h-full object-cover object-top rounded-full">
                     </div>
                 </div>
 
@@ -305,7 +324,6 @@
             </div>
         </section>
 
-    <!-- Axiolab Section -->
     <section id="axiolab" class="py-12 md:py-20 border-y border-white/5 bg-slate-950/60 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
             
@@ -325,38 +343,71 @@
                     </div>
                 </div>
 
-                <div class="md:col-span-7 grid sm:grid-cols-2 gap-5 slide-from-right">
+                <!-- 2 Rows of 2 Compact Click-to-Expand Cards -->
+                <div class="md:col-span-7 grid sm:grid-cols-2 gap-4 slide-from-right">
                     
-                    <div class="p-6 rounded-2xl glass-card space-y-3 transition-transform hover:-translate-y-1">
-                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    <!-- Box 1 -->
+                    <div onclick="toggleCardDetail('help-detail-1', 'help-icon-1')" class="p-4 rounded-xl glass-card transition-all cursor-pointer hover:border-blue-500/40 group">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                </div>
+                                <h3 class="font-bold text-white text-sm group-hover:text-blue-400 transition-colors">Full-Stack Web Engineering</h3>
+                            </div>
+                            <span id="help-icon-1" class="text-slate-400 font-mono text-xs transition-transform duration-300">▼</span>
                         </div>
-                        <h3 class="font-bold text-white text-base">Full-Stack Web Engineering</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Clean, responsive user interfaces backed by secure Python (Django/FastAPI) backend services and reliable APIs.</p>
+                        <div id="help-detail-1" class="hidden mt-3 pt-3 border-t border-white/5 text-xs text-slate-400 leading-relaxed">
+                            Clean, responsive user interfaces backed by secure Python (Django/FastAPI) backend services and reliable APIs.
+                        </div>
                     </div>
 
-                    <div class="p-6 rounded-2xl glass-card space-y-3 transition-transform hover:-translate-y-1">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <!-- Box 2 -->
+                    <div onclick="toggleCardDetail('help-detail-2', 'help-icon-2')" class="p-4 rounded-xl glass-card transition-all cursor-pointer hover:border-indigo-500/40 group">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                </div>
+                                <h3 class="font-bold text-white text-sm group-hover:text-indigo-400 transition-colors">AI & Automated Workflows</h3>
+                            </div>
+                            <span id="help-icon-2" class="text-slate-400 font-mono text-xs transition-transform duration-300">▼</span>
                         </div>
-                        <h3 class="font-bold text-white text-base">AI & Automated Workflows</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Smart document parsing, AI assistant integration, and automated processing pipelines that save time.</p>
+                        <div id="help-detail-2" class="hidden mt-3 pt-3 border-t border-white/5 text-xs text-slate-400 leading-relaxed">
+                            Smart document parsing, AI assistant integration, and automated processing pipelines that save time.
+                        </div>
                     </div>
 
-                    <div class="p-6 rounded-2xl glass-card space-y-3 transition-transform hover:-translate-y-1">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2z"></path></svg>
+                    <!-- Box 3 -->
+                    <div onclick="toggleCardDetail('help-detail-3', 'help-icon-3')" class="p-4 rounded-xl glass-card transition-all cursor-pointer hover:border-emerald-500/40 group">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2z"></path></svg>
+                                </div>
+                                <h3 class="font-bold text-white text-sm group-hover:text-emerald-400 transition-colors">E-Commerce Platforms</h3>
+                            </div>
+                            <span id="help-icon-3" class="text-slate-400 font-mono text-xs transition-transform duration-300">▼</span>
                         </div>
-                        <h3 class="font-bold text-white text-base">E-Commerce Platforms</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Custom storefronts, payment gateway integrations (Stripe, SSLCommerz), and inventory tracking systems.</p>
+                        <div id="help-detail-3" class="hidden mt-3 pt-3 border-t border-white/5 text-xs text-slate-400 leading-relaxed">
+                            Custom storefronts, payment gateway integrations (Stripe, SSLCommerz), and inventory tracking systems.
+                        </div>
                     </div>
 
-                    <div class="p-6 rounded-2xl glass-card space-y-3 transition-transform hover:-translate-y-1">
-                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg>
+                    <!-- Box 4 -->
+                    <div onclick="toggleCardDetail('help-detail-4', 'help-icon-4')" class="p-4 rounded-xl glass-card transition-all cursor-pointer hover:border-cyan-500/40 group">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg>
+                                </div>
+                                <h3 class="font-bold text-white text-sm group-hover:text-cyan-400 transition-colors">Database Optimization</h3>
+                            </div>
+                            <span id="help-icon-4" class="text-slate-400 font-mono text-xs transition-transform duration-300">▼</span>
                         </div>
-                        <h3 class="font-bold text-white text-base">Database Optimization</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Well-structured MySQL and PostgreSQL schemas designed for data integrity, quick indexing, and low latency.</p>
+                        <div id="help-detail-4" class="hidden mt-3 pt-3 border-t border-white/5 text-xs text-slate-400 leading-relaxed">
+                            Well-structured MySQL and PostgreSQL schemas designed for data integrity, quick indexing, and low latency.
+                        </div>
                     </div>
 
                 </div>
@@ -372,7 +423,6 @@
                 </div>
                 
                 <div class="grid md:grid-cols-3 gap-6 relative slide-from-right">
-                    <!-- Connecting line for desktop -->
                     <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-blue-500/0 via-blue-500/20 to-blue-500/0 -z-10"></div>
                     
                     <div class="bg-[#0b0f19] border border-slate-800 rounded-2xl p-6 relative z-10 text-center space-y-3">
@@ -398,7 +448,6 @@
         </div>
     </section>
 
-    <!-- Interactive Architecture Breakdown -->
     <section id="architecture" class="py-12 md:py-20 max-w-7xl mx-auto px-6">
         <div class="text-center mb-10 slide-from-left">
             <h2 class="text-xs text-blue-400 font-mono tracking-widest mb-1.5 uppercase">HOW I ENGINEER SOFTWARE</h2>
@@ -499,72 +548,138 @@
         </div>
     </section>
 
-    <!-- Technical Skills Matrix Section -->
-    <section id="skills" class="py-12 md:py-20 bg-slate-950/40 border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12 slide-from-left">
+    <section id="skills" class="py-12 md:py-20 bg-slate-950/40 border-y border-white/5 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-8">
+            <div class="text-center slide-from-left">
                 <h2 class="text-xs text-blue-400 font-mono tracking-widest mb-1.5 uppercase">TECHNICAL CAPABILITIES</h2>
                 <h3 class="text-2xl md:text-3xl font-extrabold text-white">Tech Stack & Tools</h3>
-                <p class="text-slate-400 mt-2 max-w-xl mx-auto text-xs sm:text-sm">Technologies I use daily to build robust, scalable web products.</p>
+                <p class="text-slate-400 mt-2 max-w-xl mx-auto text-xs sm:text-sm">Continuous modern workflow powered by production-proven technologies.</p>
+            </div>
+        </div>
+
+        <!-- Animated Infinite Marquee Rows -->
+        <div class="marquee-container space-y-4 py-2">
+            
+            <!-- Row 1: Forward Motion -->
+            <div class="overflow-hidden flex">
+                <div class="animate-marquee flex gap-4 items-center">
+                    
+                    <!-- Python -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><path d="M11.892 2c-5.187 0-4.858 2.253-4.858 2.253l.006 2.336h4.922v.702H5.112S2 6.945 2 12.164c0 5.222 2.716 5.034 2.716 5.034h1.623v-2.3c0-2.6 2.23-2.6 2.23-2.6h4.887s2.155.034 2.155-2.1v-4.88S16.142 2 11.892 2zm-2.45 1.558a.952.952 0 110 1.903.952.952 0 010-1.903z" fill="#3776AB"/><path d="M12.108 22c5.187 0 4.858-2.253 4.858-2.253l-.006-2.336h-4.922v-.702h6.852S22 17.055 22 11.836c0-5.222-2.716-5.034-2.716-5.034h-1.623v2.3c0 2.6-2.23 2.6-2.23 2.6h-4.887s-2.155-.034-2.155 2.1v4.88S7.858 22 12.108 22zm2.45-1.558a.952.952 0 110-1.903.952.952 0 010 1.903z" fill="#FFD43B"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">Python 3.12</span>
+                    </div>
+
+                    <!-- Django -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#092E20"><path d="M11.146 0h3.232v18.043c-1.428.273-2.684.382-3.775.382-3.829 0-5.713-1.611-5.713-4.838 0-3.144 2.023-4.811 5.467-4.811.273 0 .546.014.789.041V0zm0 11.458a3.178 3.178 0 00-.737-.082c-1.448 0-2.24.683-2.24 2.05 0 1.34.792 2.023 2.213 2.023.246 0 .519-.027.764-.082v-3.909zM16.038 4.417h3.224v13.626h-3.224V4.417zm1.611-4.417a1.886 1.886 0 110 3.772 1.886 1.886 0 010-3.772z" fill="#092E20"/><path d="M16.038 4.417h3.224v13.626h-3.224z" fill="#44B78B"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">Django REST</span>
+                    </div>
+
+                    <!-- FastAPI -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#009688"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.82 5.091l.82 4.091h3.273l-5.728 9.728.819-4.91H8.73l5.09-8.909z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">FastAPI</span>
+                    </div>
+
+                    <!-- React -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#61DAFB"><path d="M12 9.229c-1.53 0-2.771 1.241-2.771 2.771 0 1.53 1.241 2.771 2.771 2.771 1.53 0 2.771-1.241 2.771-2.771 0-1.53-1.241-2.771-2.771-2.771z"/><path d="M12 0C5.373 0 0 2.239 0 5s5.373 5 12 5 12-2.239 12-5-5.373-5-12-5zm0 8C6.477 8 2 6.21 2 5s4.477-3 10-3 10 1.79 10 3-4.477 3-10 3z" opacity=".3"/><path d="M20.785 4.515c-4.653-2.686-10.021-1.247-11.99 3.214-1.968 4.461.341 9.689 4.994 12.375 4.653 2.686 10.02 1.247 11.989-3.214 1.969-4.461-.341-9.689-4.993-12.375z" opacity=".15"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">React.js</span>
+                    </div>
+
+                    <!-- JavaScript -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#F7DF1E"><path d="M0 0h24v24H0z"/><path d="M12.5 18c.3.5.8.9 1.5.9.8 0 1.3-.4 1.3-1 0-.7-.5-1-1.5-1.4l-.5-.2c-1.4-.6-2.3-1.3-2.3-2.9 0-1.6 1.3-2.8 3.3-2.8 1.4 0 2.4.5 3.1 1.7l-1.6 1c-.4-.7-.9-1-1.5-1-.7 0-1.1.4-1.1.9 0 .6.4.9 1.5 1.3l.5.2c1.7.7 2.4 1.5 2.4 3 0 1.8-1.4 3-3.6 3-2 0-3.3-.9-4-2.2l1.5-1.3zM6.1 18c.4.7 1 1.2 1.9 1.2.9 0 1.5-.5 1.5-1.7V10.7h2.2v6.8c0 2.4-1.4 3.5-3.6 3.5-1.9 0-3.1-.9-3.8-2.2l1.8-1.3z" fill="#000"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">JavaScript ES6+</span>
+                    </div>
+
+                    <!-- Tailwind CSS -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#06B6D4"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C7.666 17.818 9.027 19.2 12.001 19.2c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">Tailwind CSS</span>
+                    </div>
+
+                    <!-- Duplicated set for seamless loop -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"><path d="M11.892 2c-5.187 0-4.858 2.253-4.858 2.253l.006 2.336h4.922v.702H5.112S2 6.945 2 12.164c0 5.222 2.716 5.034 2.716 5.034h1.623v-2.3c0-2.6 2.23-2.6 2.23-2.6h4.887s2.155.034 2.155-2.1v-4.88S16.142 2 11.892 2zm-2.45 1.558a.952.952 0 110 1.903.952.952 0 010-1.903z" fill="#3776AB"/><path d="M12.108 22c5.187 0 4.858-2.253 4.858-2.253l-.006-2.336h-4.922v-.702h6.852S22 17.055 22 11.836c0-5.222-2.716-5.034-2.716-5.034h-1.623v2.3c0 2.6-2.23 2.6-2.23 2.6h-4.887s-2.155-.034-2.155 2.1v4.88S7.858 22 12.108 22zm2.45-1.558a.952.952 0 110-1.903.952.952 0 010 1.903z" fill="#FFD43B"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">Python 3.12</span>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#092E20"><path d="M11.146 0h3.232v18.043c-1.428.273-2.684.382-3.775.382-3.829 0-5.713-1.611-5.713-4.838 0-3.144 2.023-4.811 5.467-4.811.273 0 .546.014.789.041V0zm0 11.458a3.178 3.178 0 00-.737-.082c-1.448 0-2.24.683-2.24 2.05 0 1.34.792 2.023 2.213 2.023.246 0 .519-.027.764-.082v-3.909zM16.038 4.417h3.224v13.626h-3.224V4.417zm1.611-4.417a1.886 1.886 0 110 3.772 1.886 1.886 0 010-3.772z" fill="#092E20"/><path d="M16.038 4.417h3.224v13.626h-3.224z" fill="#44B78B"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">Django REST</span>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#009688"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.82 5.091l.82 4.091h3.273l-5.728 9.728.819-4.91H8.73l5.09-8.909z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">FastAPI</span>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#61DAFB"><path d="M12 9.229c-1.53 0-2.771 1.241-2.771 2.771 0 1.53 1.241 2.771 2.771 2.771 1.53 0 2.771-1.241 2.771-2.771 0-1.53-1.241-2.771-2.771-2.771z"/><path d="M12 0C5.373 0 0 2.239 0 5s5.373 5 12 5 12-2.239 12-5-5.373-5-12-5zm0 8C6.477 8 2 6.21 2 5s4.477-3 10-3 10 1.79 10 3-4.477 3-10 3z" opacity=".3"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">React.js</span>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 slide-from-right">
-                <!-- Backend -->
-                <div class="p-5 rounded-2xl glass-card space-y-3">
-                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
-                        <h4 class="font-bold text-white text-sm">Backend & APIs</h4>
-                        <span class="text-blue-400 font-mono text-[10px]">Core</span>
+            <!-- Row 2: Reverse Motion -->
+            <div class="overflow-hidden flex">
+                <div class="animate-marquee-reverse flex gap-4 items-center">
+                    
+                    <!-- PostgreSQL -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#4169E1"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S17.63 0 12 0zm5.13 18.06c-.33-.08-.66-.18-1-.28-.56-.16-1.12-.35-1.67-.56-.56 1.03-1.27 1.95-2.12 2.72-.43.39-.9.73-1.4 1.02-.13-.13-.25-.27-.37-.41-.53-.62-.97-1.32-1.32-2.07-.35.15-.71.28-1.07.4-.36.12-.73.22-1.1.3-.11-.29-.2-.59-.28-.89-.08-.3-.14-.61-.18-.92.37-.05.74-.12 1.11-.21.37-.09.73-.2 1.09-.33-.18-.69-.28-1.41-.3-2.13-.02-.72.04-1.44.18-2.15.34.12.68.27 1.01.43.33.16.65.34.96.54.3-.82.72-1.59 1.25-2.29.53-.7 1.17-1.32 1.9-1.83.27.24.52.5.75.77.23.27.43.56.61.86-.62.48-1.17 1.04-1.63 1.67-.46.63-.82 1.33-1.07 2.07.46.12.92.27 1.37.44.45.17.89.37 1.32.59.33-.76.78-1.47 1.33-2.11.55-.64 1.2-1.2 1.93-1.66.18.3.33.62.45.95.12.33.2.67.25 1.02-.63.38-1.21.84-1.72 1.38-.51.54-.93 1.15-1.24 1.81.44.17.88.37 1.31.59.43.22.84.47 1.24.74z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">PostgreSQL</span>
                     </div>
-                    <div class="flex flex-wrap gap-1.5 text-xs font-mono">
-                        <span class="px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-300">Python / Django</span>
-                        <span class="px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-300">FastAPI / REST</span>
-                        <span class="px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-300">Node.js / Express</span>
-                    </div>
-                </div>
 
-                <!-- Frontend -->
-                <div class="p-5 rounded-2xl glass-card space-y-3">
-                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
-                        <h4 class="font-bold text-white text-sm">Frontend & UI</h4>
-                        <span class="text-indigo-400 font-mono text-[10px]">Interface</span>
+                    <!-- MySQL -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#00758F"><path d="M11.95 2C6.47 2 2 6.47 2 11.95c0 5.48 4.47 9.95 9.95 9.95 5.48 0 9.95-4.47 9.95-9.95C21.9 6.47 17.43 2 11.95 2zm3.93 12.83c-.76.54-1.69.86-2.7.86-1.02 0-1.95-.32-2.71-.86a.48.48 0 01-.13-.67l.38-.54c.15-.22.46-.27.67-.12.51.37 1.13.58 1.79.58.66 0 1.28-.21 1.79-.58.21-.15.52-.1.67.12l.38.54c.14.22.09.52-.14.67z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">MySQL Database</span>
                     </div>
-                    <div class="flex flex-wrap gap-1.5 text-xs font-mono">
-                        <span class="px-2 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-300">React / JSX</span>
-                        <span class="px-2 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-300">Tailwind CSS</span>
-                        <span class="px-2 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-300">JavaScript ES6+</span>
-                    </div>
-                </div>
 
-                <!-- Databases -->
-                <div class="p-5 rounded-2xl glass-card space-y-3">
-                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
-                        <h4 class="font-bold text-white text-sm">Databases</h4>
-                        <span class="text-emerald-400 font-mono text-[10px]">Persistence</span>
+                    <!-- Redis -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#DC382D"><path d="M22.092 14.156l-9.155 3.327a2.648 2.648 0 01-1.782 0l-9.155-3.327a.89.89 0 010-1.671l9.155-3.327a2.648 2.648 0 011.782 0l9.155 3.327a.89.89 0 010 1.671zM2.092 9.156l9.155 3.327a2.648 2.648 0 001.782 0l9.155-3.327a.89.89 0 000-1.671l-9.155-3.327a2.648 2.648 0 00-1.782 0l-9.155 3.327a.89.89 0 000 1.671z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">Redis Cache</span>
                     </div>
-                    <div class="flex flex-wrap gap-1.5 text-xs font-mono">
-                        <span class="px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">PostgreSQL</span>
-                        <span class="px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">MySQL</span>
-                        <span class="px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">Redis / Caching</span>
-                    </div>
-                </div>
 
-                <!-- DevOps & AI -->
-                <div class="p-5 rounded-2xl glass-card space-y-3">
-                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
-                        <h4 class="font-bold text-white text-sm">DevOps & AI</h4>
-                        <span class="text-cyan-400 font-mono text-[10px]">Infra</span>
+                    <!-- Docker -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#2496ED"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.954-5.43h2.118a.185.185 0 00.186-.186V3.574a.185.185 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185zm0 5.43h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.186v1.887c0 .102.082.185.185.185zM8.077 5.648h2.118a.185.185 0 00.185-.186V3.574a.185.185 0 00-.185-.185H8.077a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185zm0 5.43h2.118a.186.186 0 00.185-.185V9.006a.186.186 0 00-.185-.186H8.077a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.956 0h2.118a.186.186 0 00.185-.185V9.006a.186.186 0 00-.185-.186H5.121a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">Docker Containers</span>
                     </div>
-                    <div class="flex flex-wrap gap-1.5 text-xs font-mono">
-                        <span class="px-2 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">Docker & Git</span>
-                        <span class="px-2 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">Vector DB / RAG</span>
-                        <span class="px-2 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">Payment Integrations</span>
+
+                    <!-- Git -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#F05032"><path d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.719.719-1.881.719-2.6 0-.539-.541-.674-1.337-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348.719.721.719 1.884 0 2.604-.719.719-1.881.719-2.6 0-.721-.72-.721-1.883 0-2.604.18-.18.389-.311.614-.393V8.831a1.994 1.994 0 01-.613-.393c-.538-.539-.675-1.337-.405-1.996L7.545 3.684.453 10.776c-.604.604-.604 1.582 0 2.187l10.48 10.479c.606.603 1.583.603 2.187 0l10.426-10.426c.603-.603.603-1.582 0-2.186z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">Git / GitHub</span>
                     </div>
+
+                    <!-- Duplicated set for seamless loop -->
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#4169E1"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S17.63 0 12 0zm5.13 18.06c-.33-.08-.66-.18-1-.28-.56-.16-1.12-.35-1.67-.56-.56 1.03-1.27 1.95-2.12 2.72-.43.39-.9.73-1.4 1.02-.13-.13-.25-.27-.37-.41-.53-.62-.97-1.32-1.32-2.07-.35.15-.71.28-1.07.4-.36.12-.73.22-1.1.3-.11-.29-.2-.59-.28-.89-.08-.3-.14-.61-.18-.92.37-.05.74-.12 1.11-.21.37-.09.73-.2 1.09-.33-.18-.69-.28-1.41-.3-2.13-.02-.72.04-1.44.18-2.15.34.12.68.27 1.01.43.33.16.65.34.96.54.3-.82.72-1.59 1.25-2.29.53-.7 1.17-1.32 1.9-1.83.27.24.52.5.75.77.23.27.43.56.61.86-.62.48-1.17 1.04-1.63 1.67-.46.63-.82 1.33-1.07 2.07.46.12.92.27 1.37.44.45.17.89.37 1.32.59.33-.76.78-1.47 1.33-2.11.55-.64 1.2-1.2 1.93-1.66.18.3.33.62.45.95.12.33.2.67.25 1.02-.63.38-1.21.84-1.72 1.38-.51.54-.93 1.15-1.24 1.81.44.17.88.37 1.31.59.43.22.84.47 1.24.74z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">PostgreSQL</span>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#00758F"><path d="M11.95 2C6.47 2 2 6.47 2 11.95c0 5.48 4.47 9.95 9.95 9.95 5.48 0 9.95-4.47 9.95-9.95C21.9 6.47 17.43 2 11.95 2zm3.93 12.83c-.76.54-1.69.86-2.7.86-1.02 0-1.95-.32-2.71-.86a.48.48 0 01-.13-.67l.38-.54c.15-.22.46-.27.67-.12.51.37 1.13.58 1.79.58.66 0 1.28-.21 1.79-.58.21-.15.52-.1.67.12l.38.54c.14.22.09.52-.14.67z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">MySQL Database</span>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 bg-slate-900/90 border border-slate-800/80 px-4 py-2.5 rounded-xl shadow-lg backdrop-blur-md">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#DC382D"><path d="M22.092 14.156l-9.155 3.327a2.648 2.648 0 01-1.782 0l-9.155-3.327a.89.89 0 010-1.671l9.155-3.327a2.648 2.648 0 011.782 0l9.155 3.327a.89.89 0 010 1.671z"/></svg>
+                        <span class="text-xs font-mono font-medium text-slate-200">Redis Cache</span>
+                    </div>
+
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- Selected Case Studies & Work -->
     <section id="projects" class="py-12 md:py-20 max-w-7xl mx-auto px-6">
         <div class="text-center mb-8 slide-from-left">
             <h2 class="text-xs text-blue-400 font-mono tracking-widest mb-1.5 uppercase">CLIENT & PRODUCT HIGHLIGHTS</h2>
@@ -585,8 +700,8 @@
             <!-- Project 01: Brialto -->
             <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left" data-category="ecommerce">
                 <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Brialto E-Commerce Preview" loading="lazy" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80" alt="Brialto E-Commerce Preview" loading="lazy" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
                         <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
                             <span class="text-blue-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">Explore Code ↗</span>
@@ -613,8 +728,8 @@
             <!-- Project 02: Academic Portal -->
             <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left delay-100" data-category="web">
                 <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Academic Portal Interface Preview" loading="lazy" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80" alt="Academic Portal Interface Preview" loading="lazy" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
                         <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
                             <span class="text-indigo-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">Explore Code ↗</span>
@@ -641,8 +756,8 @@
             <!-- Project 03: Multi-Agent AI -->
             <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left delay-200" data-category="ai">
                 <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="AI Extraction Pipeline Dashboard Preview" loading="lazy" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80" alt="AI Extraction Pipeline Dashboard Preview" loading="lazy" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
                         <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
                             <span class="text-cyan-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">View Project ↗</span>
@@ -689,8 +804,7 @@
         </div>
     </section>
 
-    <!-- Professional Experience & Impact -->
-    <section class="py-10 md:py-16 bg-slate-950/80 border-y border-white/5 slide-from-right">
+    <section id="stats-section" class="py-10 md:py-16 bg-slate-950/80 border-y border-white/5 slide-from-right">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8 text-center">
                 <div class="space-y-2">
@@ -698,11 +812,14 @@
                     <div class="text-xs font-mono text-blue-400 uppercase">Axiolab Studio</div>
                     <p class="text-xs text-slate-400 leading-relaxed">Leading custom development projects from design to deployment.</p>
                 </div>
+                
+                <!-- Fast Animated Counter for 50+ -->
                 <div class="space-y-2">
-                    <div class="text-3xl md:text-4xl font-extrabold text-white">50+</div>
+                    <div class="text-3xl md:text-4xl font-extrabold text-white"><span id="count-50">0</span>+</div>
                     <div class="text-xs font-mono text-blue-400 uppercase">Systems & Modules Built</div>
                     <p class="text-xs text-slate-400 leading-relaxed">Delivered web applications, e-commerce stores, and automation tools.</p>
                 </div>
+
                 <div class="space-y-2">
                     <div class="text-3xl md:text-4xl font-extrabold text-white">Full-Stack</div>
                     <div class="text-xs font-mono text-blue-400 uppercase">Core Capability</div>
@@ -717,7 +834,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="py-12 md:py-20 max-w-4xl mx-auto px-6 slide-from-left">
         <div class="text-center mb-10">
             <span class="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-1.5">GET IN TOUCH</span>
@@ -789,7 +905,7 @@
         </div>
     </section>
 
-    <!-- Case Study Details Modal -->
+    <!-- Modal and Toast elements -->
     <div id="project-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 relative shadow-2xl space-y-4">
             <button onclick="closeProjectModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-sm font-mono bg-slate-800 px-2.5 py-1 rounded-md transition-colors" aria-label="Close Modal">✕</button>
@@ -797,7 +913,6 @@
         </div>
     </div>
 
-    <!-- Notification Toast Popup -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 bg-blue-600 text-white font-mono text-xs px-4 py-3 rounded-xl shadow-xl toast-notification opacity-0 pointer-events-none flex items-center gap-2" aria-live="polite">
         <span>✓</span>
         <span id="toast-msg">Notification</span>
@@ -805,7 +920,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="py-10 text-center text-slate-500 text-xs font-mono border-t border-white/5">
         <div>&copy; 2026 Ishmam Ayon. All rights reserved. Founder & CEO @ Axiolab.</div>
     </footer>
@@ -819,23 +933,24 @@
             }
         });
 
+        /* Keystroke-Realistic IDE Intro Simulation */
         async function runIntro() {
             if (sessionStorage.getItem('introPlayed') === 'true') return;
             
             const ideContent = document.getElementById('ide-content');
             if (!ideContent) return;
 
-            const codeTokens = [
-                { t: '# Initializing Ishmam Ayon Core System\n', c: 'text-slate-500' },
-                { t: 'from ', c: 'text-pink-500' },
-                { t: 'axiolab.core ', c: 'text-slate-300' },
-                { t: 'import ', c: 'text-pink-500' },
-                { t: 'Architect\n\n', c: 'text-blue-400' },
-                { t: 'engineer = Architect(name="Ishmam")\n', c: 'text-slate-300' },
-                { t: 'engineer.load_skills([', c: 'text-slate-300' },
-                { t: '"Django", "FastAPI", "React"', c: 'text-yellow-300' },
-                { t: '])\n', c: 'text-slate-300' },
-                { t: 'engineer.mount_portfolio()\n', c: 'text-blue-400' }
+            const codeScript = [
+                { text: '# Initializing Ishmam Ayon Core Architecture...\n', color: 'text-slate-500' },
+                { text: 'from ', color: 'text-pink-500' },
+                { text: 'axiolab.core ', color: 'text-slate-300' },
+                { text: 'import ', color: 'text-pink-500' },
+                { text: 'Architect\n\n', color: 'text-blue-400' },
+                { text: 'engineer = Architect(name="Ishmam Ayon")\n', color: 'text-slate-300' },
+                { text: 'engineer.load_stack([', color: 'text-slate-300' },
+                { text: '"Django", "FastAPI", "React", "PostgreSQL"', color: 'text-yellow-300' },
+                { text: '])\n', color: 'text-slate-300' },
+                { text: 'engineer.mount_system()\n', color: 'text-blue-400' }
             ];
 
             const logs = [
@@ -845,40 +960,44 @@
             ];
 
             let htmlContent = '';
-            
-            await new Promise(r => setTimeout(r, 250));
-            if(introSkipped) return;
+            await new Promise(r => setTimeout(r, 200));
 
-            for (let token of codeTokens) {
-                if(introSkipped) return;
-                
-                let currentSpan = `<span class="${token.c}">`;
-                let closeSpan = `</span>`;
-                let tokenText = '';
+            for (let chunk of codeScript) {
+                if (introSkipped) return;
 
-                for(let char of token.t) {
-                    if(introSkipped) return;
-                    tokenText += char;
-                    ideContent.innerHTML = htmlContent + currentSpan + tokenText + closeSpan + '<span class="ide-cursor"></span>';
+                let openTag = `<span class="${chunk.color}">`;
+                let closeTag = `</span>`;
+                let typedText = '';
+
+                for (let i = 0; i < chunk.text.length; i++) {
+                    if (introSkipped) return;
+                    let char = chunk.text[i];
+                    typedText += char;
+
+                    ideContent.innerHTML = htmlContent + openTag + typedText + closeTag + '<span class="ide-cursor"></span>';
                     ideContent.scrollTop = ideContent.scrollHeight;
-                    await new Promise(r => setTimeout(r, Math.random() * 10 + 4));
+
+                    // Keystroke timing randomization (15ms - 45ms + micro pause on space/newline)
+                    let delay = Math.floor(Math.random() * 30) + 15;
+                    if (char === ' ' || char === '\n') delay += 35;
+                    await new Promise(r => setTimeout(r, delay));
                 }
-                htmlContent += currentSpan + tokenText + closeSpan;
+                htmlContent += openTag + typedText + closeTag;
             }
 
-            if(introSkipped) return;
-            await new Promise(r => setTimeout(r, 120));
+            if (introSkipped) return;
+            await new Promise(r => setTimeout(r, 100));
 
-            for (let i = 0; i < logs.length; i++) {
-                if(introSkipped) return;
-                htmlContent += logs[i] + '\n';
+            for (let log of logs) {
+                if (introSkipped) return;
+                htmlContent += log + '\n';
                 ideContent.innerHTML = htmlContent + '<span class="ide-cursor"></span>';
                 ideContent.scrollTop = ideContent.scrollHeight;
-                await new Promise(r => setTimeout(r, 80));
+                await new Promise(r => setTimeout(r, 70));
             }
 
-            if(introSkipped) return;
-            await new Promise(r => setTimeout(r, 300));
+            if (introSkipped) return;
+            await new Promise(r => setTimeout(r, 250));
             skipIntro();
         }
 
@@ -887,7 +1006,7 @@
             sessionStorage.setItem('introPlayed', 'true');
             const introEl = document.getElementById('ide-intro');
             
-            if(introEl) {
+            if (introEl) {
                 introEl.classList.add('intro-hide');
                 document.body.style.overflow = 'auto';
                 setTimeout(() => {
@@ -899,28 +1018,69 @@
             }
         }
 
+        /* Fast 50+ Counter Animation */
+        let hasCounted = false;
+        function initCounterAnimation() {
+            const statsSection = document.getElementById('stats-section');
+            const counterEl = document.getElementById('count-50');
+            if (!statsSection || !counterEl) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasCounted) {
+                        hasCounted = true;
+                        let count = 0;
+                        const target = 50;
+                        const duration = 800; // total ms
+                        const stepTime = duration / target;
+
+                        const timer = setInterval(() => {
+                            count++;
+                            counterEl.textContent = count;
+                            if (count >= target) {
+                                clearInterval(timer);
+                            }
+                        }, stepTime);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            observer.observe(statsSection);
+        }
+
+        function toggleCardDetail(detailId, iconId) {
+            const detail = document.getElementById(detailId);
+            const icon = document.getElementById(iconId);
+            if (!detail) return;
+
+            if (detail.classList.contains('hidden')) {
+                detail.classList.remove('hidden');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            } else {
+                detail.classList.add('hidden');
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
         function initApp() {
             if (sessionStorage.getItem('introPlayed') !== 'true') {
                 runIntro();
             } else {
                 const introEl = document.getElementById('ide-intro');
-                if(introEl) introEl.remove();
+                if (introEl) introEl.remove();
                 document.body.style.overflow = 'auto';
                 typeEffect();
             }
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px 0px -50px 0px',
-                threshold: 0.1
-            };
+            initCounterAnimation();
+
             const slideObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('slide-in-visible');
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.1 });
 
             document.querySelectorAll('.slide-from-left, .slide-from-right').forEach(el => {
                 slideObserver.observe(el);
@@ -990,7 +1150,7 @@
             });
 
             const activeBtn = document.getElementById('filter-' + category);
-            if(activeBtn) {
+            if (activeBtn) {
                 activeBtn.classList.add('bg-blue-600', 'text-white');
                 activeBtn.classList.remove('bg-slate-900', 'text-slate-300', 'border-slate-800');
             }
