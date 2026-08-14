@@ -1,373 +1,1146 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth dark">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ishmam Ayon — Full-Stack Architect & Founder @ Axiolab</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ishmam Ayon — Full-Stack Architect & Founder @ Axiolab</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            slate: {
-              950: '#0b0f19',
-              900: '#111827'
-            },
-            brand: {
-              blue: '#3b82f6',
-              cyan: '#06b6d4'
+    <!-- SEO & Open Graph Meta Tags -->
+    <meta name="description" content="I help ambitious startups and enterprises build high-performance web systems, robust backends, and smart AI workflows.">
+    <meta name="keywords" content="Full-Stack Developer, Django, FastAPI, React, AI Automation, Web Architecture, Axiolab">
+    <meta name="author" content="Ishmam Ayon">
+    <link rel="canonical" href="https://ishmamayon.github.io/">
+    
+    <meta property="og:title" content="Ishmam Ayon — Full-Stack Architect">
+    <meta property="og:description" content="I build responsive, SEO-friendly websites and scalable backends that drive business results.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://i.postimg.cc/14xxMtSk/profile.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ishmam Ayon — Full-Stack Architect">
+    <meta name="twitter:description" content="Building high-performance web systems and AI workflows.">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ishmam Ayon",
+      "url": "https://ishmamayon.github.io/",
+      "jobTitle": "Founder & Full-Stack Architect",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Axiolab"
+      },
+      "sameAs": [
+        "https://github.com/Ishmamayon",
+        "https://www.linkedin.com/in/ishmam-ayon-681759426/"
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            950: '#0b0f19',
+                            900: '#111827',
+                            850: '#161e31',
+                            800: '#1f293d',
+                            700: '#334155'
+                        },
+                        brand: {
+                            blue: '#3b82f6',
+                            cyan: '#06b6d4',
+                            indigo: '#6366f1',
+                            emerald: '#10b981',
+                            purple: '#8b5cf6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
             }
-          },
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          }
         }
-      }
-    }
-  </script>
+    </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --page-padding: clamp(12px, 3vw, 28px);
-    }
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
 
-    body {
-      background-color: #0b0f19;
-      color: #e6eef8;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      overflow-x: hidden;
-    }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
 
-    .mono { font-family: 'JetBrains Mono', monospace; }
+        /* Subtle grid background */
+        .bg-grid {
+            background-size: 32px 32px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
 
-    /* Avatar (circular) */
-    .avatar {
-      width: clamp(72px, 16vw, 140px);
-      height: clamp(72px, 16vw, 140px);
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-      box-shadow: 0 8px 24px rgba(11, 17, 25, 0.6);
-      border: 3px solid rgba(255,255,255,0.06);
-    }
+        /* Refined glassmorphism card styling */
+        .glass-card {
+            background: rgba(22, 30, 49, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-    /* Compact hero adjustments */
-    .hero-compact {
-      padding: var(--page-padding);
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .hero-compact .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 20px;
-      align-items: center;
-    }
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.15);
+        }
 
-    /* Collapsible snippet */
-    .collapsible-toggle {
-      width: 100%;
-      background: rgba(255,255,255,0.02);
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.04);
-      text-align: left;
-    }
+        /* Custom scroll animations */
+        .slide-from-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
 
-    /* Sticky CTA on mobile */
-    .sticky-cta {
-      display: none;
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 14px;
-      z-index: 80;
-      background: #0b74da;
-      color: white;
-      padding: 12px 18px;
-      border-radius: 999px;
-      box-shadow: 0 10px 30px rgba(11,116,218,0.18);
-      font-weight: 600;
-      text-decoration: none;
-    }
+        .slide-from-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
 
-    /* Keep hero height modest on small screens */
-    @media (max-width: 720px) {
-      .hero-compact .hero-inner { grid-template-columns: 1fr; gap: 10px; }
-      .hero-compact { padding-top: 64px; padding-bottom: 12px; }
-      .hero-compact .hero-copy h1 { font-size: 1.5rem; line-height: 1.05; }
-      .hero-compact .hero-copy p { font-size: 0.95rem; }
-      .sticky-cta { display: inline-block; width: calc(100% - 32px); max-width: 680px; }
-    }
+        .slide-in-visible {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
 
-    /* Reduce large vertical spacing on mobile */
-    h1, h2, h3 { margin: 0; }
-    .compact-sub { margin-top: 6px; margin-bottom: 8px; color: #cbd5e1; }
-  </style>
+        /* IDE Intro Styles */
+        .intro-hide {
+            opacity: 0 !important;
+            transform: scale(1.05) !important;
+            pointer-events: none !important;
+        }
+
+        .ide-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: #3b82f6;
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Toast popup style */
+        .toast-notification {
+            transform: translateY(100px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        }
+        .toast-show {
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f293d;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+    </style>
 </head>
 
-<body class="bg-[#0b0f19] text-slate-100 min-h-screen selection:bg-blue-500 selection:text-white relative">
+<body class="bg-[#0b0f19] text-slate-100 bg-grid min-h-screen selection:bg-blue-500 selection:text-white relative">
 
-  <!-- Header -->
-  <header class="fixed top-0 left-0 right-0 z-40 bg-[#0b0f19]/90 backdrop-blur-sm border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#home" class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-md">IA</div>
-        <div class="flex flex-col leading-tight">
-          <span class="font-bold text-white text-sm">Ishmam Ayon</span>
-          <span class="text-[11px] text-slate-400 mono">Founder & CEO @ Axiolab</span>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-lg z-[200] shadow-xl">Skip to main content</a>
+
+    <!-- IDE Splash Intro -->
+    <div id="ide-intro" class="fixed inset-0 z-[100] bg-[#020617] flex items-center justify-center transition-all duration-700 ease-in-out">
+        <div id="ide-window" class="w-11/12 max-w-2xl bg-[#0b0f19] rounded-xl border border-slate-800 shadow-2xl shadow-blue-500/10 overflow-hidden transform transition-all duration-500 ease-out">
+            <div class="h-9 bg-slate-900 border-b border-slate-800 flex items-center px-4 justify-between">
+                <div class="flex gap-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+                </div>
+                <div class="text-[11px] font-mono text-slate-500">ishmam@system: ~/boot.py</div>
+                <button onclick="skipIntro()" class="text-[10px] font-mono text-slate-400 hover:text-white px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 transition-colors">Skip [ESC]</button>
+            </div>
+            <div class="p-4 sm:p-5 h-[35vh] min-h-[220px] max-h-[350px] overflow-y-auto font-mono text-xs sm:text-sm text-slate-300 text-left whitespace-pre-wrap leading-relaxed" id="ide-content"></div>
         </div>
-      </a>
-
-      <nav class="hidden md:flex items-center space-x-6 text-xs font-semibold text-slate-300 uppercase">
-        <a href="#about" class="hover:text-blue-400">About</a>
-        <a href="#projects" class="hover:text-blue-400">Work</a>
-        <a href="#contact" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">Get in Touch</a>
-      </nav>
-
-      <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg bg-slate-900 border border-white/10 text-slate-300">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
     </div>
 
-    <div id="mobile-menu" class="hidden md:hidden bg-[#0b0f19] border-t border-white/5 px-6 py-4 space-y-3">
-      <a href="#about" onclick="toggleMobileMenu()" class="block text-sm text-slate-300">About</a>
-      <a href="#projects" onclick="toggleMobileMenu()" class="block text-sm text-slate-300">Work</a>
-      <a href="#contact" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-blue-400">Get in Touch →</a>
+    <!-- Script to prevent FOUC / Handle initial load state immediately -->
+    <script>
+        if (sessionStorage.getItem('introPlayed') === 'true') {
+            document.getElementById('ide-intro').style.display = 'none';
+        } else {
+            document.body.style.overflow = 'hidden';
+        }
+    </script>
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-[#0b0f19]/85 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            
+            <!-- Brand Identity -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                    IA
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-white tracking-tight leading-tight text-base">Ishmam Ayon</span>
+                    <span class="text-[11px] text-slate-400 font-mono">Founder & CEO @ Axiolab</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                <a href="#axiolab" class="hover:text-blue-400 transition-colors">My Company</a>
+                <a href="#architecture" class="hover:text-blue-400 transition-colors">Engineering</a>
+                <a href="#skills" class="hover:text-blue-400 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-blue-400 transition-colors">Work</a>
+                <a href="#contact" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg transition-all shadow-md shadow-blue-600/20 normal-case font-medium text-sm">
+                    Get in Touch
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Trigger -->
+            <button onclick="toggleMobileMenu()" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-slate-900 border border-white/10 text-slate-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#111827] border-b border-white/10 px-6 py-6 space-y-4 shadow-2xl">
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-sm font-medium text-slate-300 hover:text-blue-400">About</a>
+            <a href="#axiolab" onclick="toggleMobileMenu()" class="block text-sm font-medium text-slate-300 hover:text-blue-400">My Company (Axiolab)</a>
+            <a href="#architecture" onclick="toggleMobileMenu()" class="block text-sm font-medium text-slate-300 hover:text-blue-400">Engineering</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block text-sm font-medium text-slate-300 hover:text-blue-400">Technical Skills</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block text-sm font-medium text-slate-300 hover:text-blue-400">Work & Case Studies</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-sm font-medium text-blue-400 font-bold">Get in Touch →</a>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="pt-24 md:pt-32 pb-12 md:pb-16 px-6 max-w-7xl mx-auto flex items-center">
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 w-full">
+                
+                <!-- Profile Circular Image (Top on Mobile, Right on Desktop) -->
+                <div class="w-full md:w-auto flex justify-center order-1 md:order-2 slide-from-right">
+                    <div class="relative w-40 h-40 sm:w-48 sm:h-48 lg:w-[280px] lg:h-[280px] rounded-full p-1 bg-gradient-to-tr from-blue-500 via-indigo-500 to-cyan-400 shadow-2xl shadow-blue-500/20">
+                        <div class="w-full h-full rounded-full bg-slate-900 overflow-hidden border-4 border-[#0b0f19]">
+                            <img src="profile.png" alt="Ishmam Ayon" 
+                                 onerror="this.onerror=null; this.src='https://i.postimg.cc/14xxMtSk/profile.png';"
+                                 class="w-full h-full object-cover object-top">
+                        </div>
+                        <!-- Status indicator dot -->
+                        <div class="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 w-6 h-6 sm:w-8 sm:h-8 bg-[#0b0f19] rounded-full flex items-center justify-center shadow-lg border border-white/10" title="Open for Work">
+                            <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Copy (Text) -->
+                <div class="flex-1 space-y-5 slide-from-left order-2 md:order-1 text-center md:text-left">
+                    <div class="space-y-1">
+                        <span class="text-xs font-mono text-blue-400 font-semibold uppercase tracking-wider block">Engineering Digital Excellence</span>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight flex justify-center md:justify-start items-center flex-wrap gap-x-2">
+                            <span>I'm</span><div class="inline-flex items-center"><span id="typewriter-text" class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400"></span><span id="typewriter-cursor" class="inline-block w-[3px] h-[0.85em] bg-blue-400 align-middle ml-1 animate-pulse"></span></div>
+                        </h1>
+                    </div>
+
+                    <h2 class="text-base sm:text-lg font-bold text-slate-200 tracking-tight leading-snug max-w-2xl mx-auto md:mx-0">
+                        I help startups and enterprises build scalable web systems and AI workflows to operate faster and grow reliably.
+                    </h2>
+
+                    <p class="text-slate-300 text-sm leading-relaxed max-w-xl mx-auto md:mx-0 font-light">
+                        Founder of <strong class="text-white font-semibold">Axiolab</strong>. I architect resilient software products from the ground up—combining sleek user interfaces with rock-solid database engineering.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="pt-2 flex flex-wrap justify-center md:justify-start gap-3">
+                        <a href="#projects" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-3 rounded-xl transition-all shadow-lg shadow-blue-600/25 flex items-center gap-2 text-xs sm:text-sm">
+                            <span>View Featured Work</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <a href="#contact" class="bg-slate-900 hover:bg-slate-850 text-slate-200 border border-slate-800 font-semibold px-5 py-3 rounded-xl transition-all text-xs sm:text-sm">
+                            Get in Touch
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    <!-- Axiolab Section -->
+    <section id="axiolab" class="py-12 md:py-20 border-y border-white/5 bg-slate-950/60 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="grid md:grid-cols-12 gap-10 items-center">
+                
+                <div class="md:col-span-5 space-y-4 slide-from-left">
+                    <div class="text-xs font-mono text-blue-400 uppercase tracking-widest font-semibold">ABOUT AXIOLAB STUDIO</div>
+                    <h2 class="text-2xl md:text-4xl font-extrabold text-white">How We Help Clients</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed font-light">
+                        <strong>Axiolab</strong> is my software development studio. We help founders and companies build full-stack web products, internal management portals, e-commerce applications, and tailored AI tools. We focus on clean code, strong security, and real business results.
+                    </p>
+                    <div class="pt-2">
+                        <a href="#contact" class="inline-flex items-center gap-2 text-xs font-mono font-semibold text-blue-400 hover:text-blue-300 border-b border-blue-400/40 pb-1 transition-colors">
+                            <span>Discuss a project with Axiolab</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-7 grid sm:grid-cols-2 gap-5 slide-from-right">
+                    
+                    <div class="p-6 rounded-2xl glass-card space-y-3 transition-transform hover:-translate-y-1">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">Full-Stack Web Engineering</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Clean, responsive user interfaces backed by secure Python (Django/FastAPI) backend services and reliable APIs.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-card space-y-3 transition-transform hover:-translate-y-1">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">AI & Automated Workflows</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Smart document parsing, AI assistant integration, and automated processing pipelines that save time.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-card space-y-3 transition-transform hover:-translate-y-1">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 11h14a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">E-Commerce Platforms</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Custom storefronts, payment gateway integrations (Stripe, SSLCommerz), and inventory tracking systems.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-card space-y-3 transition-transform hover:-translate-y-1">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">Database Optimization</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Well-structured MySQL and PostgreSQL schemas designed for data integrity, quick indexing, and low latency.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Process / How We Work -->
+            <div class="mt-12 md:mt-20 border-t border-white/5 pt-12 md:pt-16">
+                <div class="text-center mb-10 slide-from-left">
+                    <h2 class="text-xs text-blue-400 font-mono tracking-widest mb-1.5 uppercase">OUR PROCESS</h2>
+                    <h3 class="text-2xl md:text-3xl font-extrabold text-white">How We Work</h3>
+                    <p class="text-slate-400 mt-2 max-w-xl mx-auto text-xs sm:text-sm">A transparent, results-driven approach to software development.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6 relative slide-from-right">
+                    <!-- Connecting line for desktop -->
+                    <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-blue-500/0 via-blue-500/20 to-blue-500/0 -z-10"></div>
+                    
+                    <div class="bg-[#0b0f19] border border-slate-800 rounded-2xl p-6 relative z-10 text-center space-y-3">
+                        <div class="w-12 h-12 mx-auto bg-slate-900 border border-blue-500/30 rounded-full flex items-center justify-center text-blue-400 font-mono font-bold text-lg shadow-[0_0_15px_rgba(59,130,246,0.15)]">1</div>
+                        <h4 class="font-bold text-white">Discovery & Strategy</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">We define the core problem, map out user journeys, and architect a technical solution aligned with your business goals.</p>
+                    </div>
+                    
+                    <div class="bg-[#0b0f19] border border-slate-800 rounded-2xl p-6 relative z-10 text-center space-y-3">
+                        <div class="w-12 h-12 mx-auto bg-slate-900 border border-indigo-500/30 rounded-full flex items-center justify-center text-indigo-400 font-mono font-bold text-lg shadow-[0_0_15px_rgba(99,102,241,0.15)]">2</div>
+                        <h4 class="font-bold text-white">Agile Development</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Building the application in systematic sprints. You get regular updates, demo access, and transparent code commits.</p>
+                    </div>
+                    
+                    <div class="bg-[#0b0f19] border border-slate-800 rounded-2xl p-6 relative z-10 text-center space-y-3">
+                        <div class="w-12 h-12 mx-auto bg-slate-900 border border-emerald-500/30 rounded-full flex items-center justify-center text-emerald-400 font-mono font-bold text-lg shadow-[0_0_15px_rgba(16,185,129,0.15)]">3</div>
+                        <h4 class="font-bold text-white">Deployment & Scale</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">We launch with secure hosting, implement analytics monitoring, and provide ongoing maintenance as you scale.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Architecture Breakdown -->
+    <section id="architecture" class="py-12 md:py-20 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-10 slide-from-left">
+            <h2 class="text-xs text-blue-400 font-mono tracking-widest mb-1.5 uppercase">HOW I ENGINEER SOFTWARE</h2>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-white">Development & Architecture</h3>
+            <p class="text-slate-400 mt-2 max-w-xl mx-auto text-xs sm:text-sm">A clear look at how I structure codebases, database models, and workflow automations.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 md:p-8 slide-from-right">
+            <!-- Nav Tabs -->
+            <div class="flex flex-wrap gap-2.5 border-b border-white/10 pb-5 mb-8">
+                <button onclick="switchTab('tab-web')" id="btn-tab-web" class="arch-tab-btn active text-xs font-mono px-4 py-2.5 rounded-xl bg-blue-600 text-white font-semibold transition-all">
+                    1. Web Application Architecture
+                </button>
+                <button onclick="switchTab('tab-ai')" id="btn-tab-ai" class="arch-tab-btn text-xs font-mono px-4 py-2.5 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 transition-all">
+                    2. Intelligent AI Integration
+                </button>
+                <button onclick="switchTab('tab-db')" id="btn-tab-db" class="arch-tab-btn text-xs font-mono px-4 py-2.5 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 transition-all">
+                    3. Database & Query Performance
+                </button>
+            </div>
+
+            <!-- Tab Content 1: Web App Architecture -->
+            <div id="tab-web" class="arch-tab-content grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-white">Django & React Architecture</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed font-light">
+                        I build web apps with a clear separation between frontend interfaces and backend API services to ensure speed and easy maintainability.
+                    </p>
+                    <ul class="space-y-2.5 text-xs font-mono text-slate-300">
+                        <li class="flex items-center gap-2.5"><span class="text-blue-400">✓</span> Django REST Framework / FastAPI endpoints with secure token auth</li>
+                        <li class="flex items-center gap-2.5"><span class="text-blue-400">✓</span> Modular React components and responsive styling</li>
+                        <li class="flex items-center gap-2.5"><span class="text-blue-400">✓</span> Secure payment integration with Stripe and SSLCommerz</li>
+                        <li class="flex items-center gap-2.5"><span class="text-blue-400">✓</span> Lightweight state management and quick initial page loads</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 font-mono text-xs text-slate-300 space-y-3 shadow-inner">
+                    <div class="text-slate-400 border-b border-slate-800 pb-3 flex justify-between">
+                        <span>WEB_SYSTEM_FLOW.md</span>
+                        <span class="text-emerald-400">STATUS: ACTIVE</span>
+                    </div>
+                    <div class="text-slate-400">[React Frontend] ──(REST / JSON)──► [FastAPI / Django API]</div>
+                    <div class="pl-28 text-slate-400">│</div>
+                    <div class="pl-28 text-slate-400">├──► [ORM & Validation] ──► [PostgreSQL / MySQL]</div>
+                    <div class="pl-28 text-slate-400">└──► [Background Queue] ──► [Redis Cache]</div>
+                </div>
+            </div>
+
+            <!-- Tab Content 2: AI Workflows -->
+            <div id="tab-ai" class="arch-tab-content hidden grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-white">Intelligent Data Extraction Pipeline</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed font-light">
+                        Instead of unpredictable raw prompts, I build structured pipelines that extract data from multi-page PDFs, validate output schemas, and write structured records into databases.
+                    </p>
+                    <ul class="space-y-2.5 text-xs font-mono text-slate-300">
+                        <li class="flex items-center gap-2.5"><span class="text-indigo-400">✓</span> Automatic document scanning and key-value extraction</li>
+                        <li class="flex items-center gap-2.5"><span class="text-indigo-400">✓</span> Contextual document search using vector embeddings (RAG)</li>
+                        <li class="flex items-center gap-2.5"><span class="text-indigo-400">✓</span> Strict schema validation safeguards prior to saving</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 font-mono text-xs text-slate-300 space-y-3 shadow-inner">
+                    <div class="text-slate-400 border-b border-slate-800 pb-3 flex justify-between">
+                        <span>DATA_PIPELINE.md</span>
+                        <span class="text-indigo-400">PIPELINE: READY</span>
+                    </div>
+                    <div class="text-slate-400">[Uploaded PDF File] ──► [Parsing Engine]</div>
+                    <div class="pl-20 text-slate-400">│</div>
+                    <div class="pl-20 text-slate-400">├──► [Extraction Agent] ──► [Schema Validator]</div>
+                    <div class="pl-20 text-slate-400">└──► [JSON Output] ──► [Relational Database]</div>
+                </div>
+            </div>
+
+            <!-- Tab Content 3: Database Performance -->
+            <div id="tab-db" class="arch-tab-content hidden grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-white">Database Optimization & Query Speed</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed font-light">
+                        Data integrity comes first. I design relational database schemas that remain fast as records grow, using targeted indexes and efficient queries.
+                    </p>
+                    <ul class="space-y-2.5 text-xs font-mono text-slate-300">
+                        <li class="flex items-center gap-2.5"><span class="text-emerald-400">✓</span> Normalized relational tables and foreign keys</li>
+                        <li class="flex items-center gap-2.5"><span class="text-emerald-400">✓</span> Optimized query structures and targeted indexing</li>
+                        <li class="flex items-center gap-2.5"><span class="text-emerald-400">✓</span> Reliable transaction processing for store sales and analytics</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 font-mono text-xs text-slate-300 space-y-3 shadow-inner">
+                    <div class="text-slate-400 border-b border-slate-800 pb-3 flex justify-between">
+                        <span>DATABASE_LOG.md</span>
+                        <span class="text-emerald-400">OPTIMIZED</span>
+                    </div>
+                    <div class="text-slate-400">Query Optimization Results:</div>
+                    <div class="text-emerald-400">&gt; Index added to [user_id, status, created_at]</div>
+                    <div class="text-slate-400">&gt; Query execution reduced from 380ms to 14ms</div>
+                    <div class="text-slate-400">&gt; Database connection pool: Healthy</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Technical Skills Matrix Section -->
+    <section id="skills" class="py-12 md:py-20 bg-slate-950/40 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12 slide-from-left">
+                <h2 class="text-xs text-blue-400 font-mono tracking-widest mb-1.5 uppercase">TECHNICAL CAPABILITIES</h2>
+                <h3 class="text-2xl md:text-3xl font-extrabold text-white">Tech Stack & Tools</h3>
+                <p class="text-slate-400 mt-2 max-w-xl mx-auto text-xs sm:text-sm">Technologies I use daily to build robust, scalable web products.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 slide-from-right">
+                <!-- Backend -->
+                <div class="p-5 rounded-2xl glass-card space-y-3">
+                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                        <h4 class="font-bold text-white text-sm">Backend & APIs</h4>
+                        <span class="text-blue-400 font-mono text-[10px]">Core</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 text-xs font-mono">
+                        <span class="px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-300">Python / Django</span>
+                        <span class="px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-300">FastAPI / REST</span>
+                        <span class="px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-300">Node.js / Express</span>
+                    </div>
+                </div>
+
+                <!-- Frontend -->
+                <div class="p-5 rounded-2xl glass-card space-y-3">
+                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                        <h4 class="font-bold text-white text-sm">Frontend & UI</h4>
+                        <span class="text-indigo-400 font-mono text-[10px]">Interface</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 text-xs font-mono">
+                        <span class="px-2 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-300">React / JSX</span>
+                        <span class="px-2 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-300">Tailwind CSS</span>
+                        <span class="px-2 py-1 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-300">JavaScript ES6+</span>
+                    </div>
+                </div>
+
+                <!-- Databases -->
+                <div class="p-5 rounded-2xl glass-card space-y-3">
+                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                        <h4 class="font-bold text-white text-sm">Databases</h4>
+                        <span class="text-emerald-400 font-mono text-[10px]">Persistence</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 text-xs font-mono">
+                        <span class="px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">PostgreSQL</span>
+                        <span class="px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">MySQL</span>
+                        <span class="px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">Redis / Caching</span>
+                    </div>
+                </div>
+
+                <!-- DevOps & AI -->
+                <div class="p-5 rounded-2xl glass-card space-y-3">
+                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                        <h4 class="font-bold text-white text-sm">DevOps & AI</h4>
+                        <span class="text-cyan-400 font-mono text-[10px]">Infra</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 text-xs font-mono">
+                        <span class="px-2 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">Docker & Git</span>
+                        <span class="px-2 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">Vector DB / RAG</span>
+                        <span class="px-2 py-1 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">Payment Integrations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Selected Case Studies & Work -->
+    <section id="projects" class="py-12 md:py-20 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-8 slide-from-left">
+            <h2 class="text-xs text-blue-400 font-mono tracking-widest mb-1.5 uppercase">CLIENT & PRODUCT HIGHLIGHTS</h2>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-white">Featured Work</h3>
+            <p class="text-slate-400 mt-2 max-w-xl mx-auto text-xs sm:text-sm">Real-world systems, storefronts, and tools engineered with clean architecture.</p>
+        </div>
+
+        <!-- Project Filter Controls -->
+        <div class="flex flex-wrap justify-center gap-2 mb-10">
+            <button onclick="filterProjects('all')" id="filter-all" class="filter-btn active text-xs font-mono px-4 py-2 rounded-xl bg-blue-600 text-white font-medium transition-all">All Projects</button>
+            <button onclick="filterProjects('ecommerce')" id="filter-ecommerce" class="filter-btn text-xs font-mono px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 transition-all">E-Commerce</button>
+            <button onclick="filterProjects('web')" id="filter-web" class="filter-btn text-xs font-mono px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 transition-all">Web Apps</button>
+            <button onclick="filterProjects('ai')" id="filter-ai" class="filter-btn text-xs font-mono px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 transition-all">AI & Automation</button>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Project 01: Brialto -->
+            <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left" data-category="ecommerce">
+                <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Brialto E-Commerce Preview" loading="lazy" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
+                        <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
+                            <span class="text-blue-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">Explore Code ↗</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="mb-2">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">E-Commerce</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2 leading-tight">Brialto — Storefront</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-4 flex-1">Fast e-commerce platform with custom product catalog management, instant search, and secure payment processing.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">React</span>
+                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Django</span>
+                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Stripe</span>
+                    </div>
+                    <button onclick="openProjectModal('brialto')" class="mt-auto inline-flex items-center justify-between w-full text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/20 px-3 py-2 rounded-lg transition-colors">
+                        View Technical Details <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 02: Academic Portal -->
+            <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left delay-100" data-category="web">
+                <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Academic Portal Interface Preview" loading="lazy" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
+                        <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
+                            <span class="text-indigo-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">Explore Code ↗</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="mb-2">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">Web App</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2 leading-tight">Academic Portal</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-4 flex-1">Comprehensive academic system handling student enrollment, course registrations, and automatic CGPA calculations.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Python</span>
+                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Django</span>
+                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">MySQL</span>
+                    </div>
+                    <button onclick="openProjectModal('academic')" class="mt-auto inline-flex items-center justify-between w-full text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/20 px-3 py-2 rounded-lg transition-colors">
+                        View Technical Details <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 03: Multi-Agent AI -->
+            <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left delay-200" data-category="ai">
+                <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="AI Extraction Pipeline Dashboard Preview" loading="lazy" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
+                        <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
+                            <span class="text-cyan-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">View Project ↗</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="mb-2">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">Automation</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2 leading-tight">Data Extraction AI</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed mb-4 flex-1">Automated document parsing tool that converts unstructured multi-page PDFs into verified database records.</p>
+                    <div class="flex flex-wrap gap-1.5 mb-4">
+                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">FastAPI</span>
+                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Vector DB</span>
+                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">PostgreSQL</span>
+                    </div>
+                    <button onclick="openProjectModal('ai-swarm')" class="mt-auto inline-flex items-center justify-between w-full text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/20 px-3 py-2 rounded-lg transition-colors">
+                        View Technical Details <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Client Success / Social Proof -->
+    <section class="py-10 md:py-16 max-w-5xl mx-auto px-6 slide-from-right">
+        <div class="p-8 md:p-10 rounded-2xl glass-card border border-white/10 bg-gradient-to-br from-slate-900/80 to-blue-900/10 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-6 opacity-10">
+                <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
+            </div>
+            <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+                <div class="flex-1 space-y-4">
+                    <p class="text-lg md:text-xl font-medium text-slate-200 leading-relaxed italic">
+                        "Ishmam doesn't just write code; he architects solutions that solve actual business problems. Our platform's performance and stability skyrocketed after his intervention. Axiolab is our go-to engineering partner."
+                    </p>
+                    <div>
+                        <div class="font-bold text-white text-sm">Startup Founder</div>
+                        <div class="text-blue-400 text-xs font-mono">E-Commerce SaaS Client</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience & Impact -->
+    <section class="py-10 md:py-16 bg-slate-950/80 border-y border-white/5 slide-from-right">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div class="space-y-2">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white">Founder</div>
+                    <div class="text-xs font-mono text-blue-400 uppercase">Axiolab Studio</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Leading custom development projects from design to deployment.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white">50+</div>
+                    <div class="text-xs font-mono text-blue-400 uppercase">Systems & Modules Built</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Delivered web applications, e-commerce stores, and automation tools.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white">Full-Stack</div>
+                    <div class="text-xs font-mono text-blue-400 uppercase">Core Capability</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Experienced across frontend UI, Python APIs, and database engineering.</p>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-3xl md:text-4xl font-extrabold text-white">Quality</div>
+                    <div class="text-xs font-mono text-blue-400 uppercase">First</div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Focus on reliability, clean code standards, and long-term maintainability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 md:py-20 max-w-4xl mx-auto px-6 slide-from-left">
+        <div class="text-center mb-10">
+            <span class="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-1.5">GET IN TOUCH</span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-white">Let's Work Together</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-2 max-w-lg mx-auto">
+                Have a project in mind, need technical help, or want to work with Axiolab? Send a message directly or reach out via social media platforms below.
+            </p>
+        </div>
+
+        <!-- Contact Form Card -->
+        <div class="glass-card rounded-2xl p-6 md:p-8 border border-white/10 shadow-2xl mb-10">
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <input type="hidden" name="_subject" value="New Portfolio Inquiry for Ishmam Ayon">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Your Name</label>
+                        <input type="text" name="name" required placeholder="e.g. Alex Vance" 
+                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 text-sm transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Email Address</label>
+                        <input type="email" name="email" required placeholder="alex@company.com" 
+                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 text-sm transition-colors">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono uppercase text-slate-300 mb-2">Project Details / Message</label>
+                    <textarea name="message" rows="4" required placeholder="Describe your web project, software needs, or inquiry..." 
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 text-sm transition-colors"></textarea>
+                </div>
+
+                <button type="submit" 
+                    class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-all shadow-lg shadow-blue-600/20 text-sm font-mono flex items-center justify-center gap-2">
+                    <span>Send Message Directly →</span>
+                </button>
+
+                <div id="form-status" class="hidden p-4 rounded-xl text-xs font-mono text-center mt-4"></div>
+            </form>
+        </div>
+
+        <!-- Media Platform Direct Contact Links -->
+        <div class="text-center space-y-4">
+            <div class="text-xs font-mono text-slate-400 uppercase tracking-widest">Or connect directly via platforms</div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-6 pt-2">
+                <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" title="GitHub Profile" class="text-white p-1 hover:text-blue-400 transition-colors">
+                    <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/ishmam-ayon-681759426/" target="_blank" rel="noopener" title="LinkedIn Profile" class="text-[#0A66C2] p-1 hover:opacity-80 transition-opacity">
+                    <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.762-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="https://wa.me/8801815491588" target="_blank" rel="noopener" title="WhatsApp Chat" class="text-[#25D366] p-1 hover:opacity-80 transition-opacity">
+                    <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/ishmam64" target="_blank" rel="noopener" title="Facebook Profile" class="text-[#1877F2] p-1 hover:opacity-80 transition-opacity">
+                    <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <button onclick="copyToClipboard('01815491588', 'Phone number copied!')" title="Copy Phone Number" class="text-cyan-400 p-1 hover:text-cyan-300 transition-colors">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </button>
+                <button onclick="copyToClipboard('ayondesigns6@gmail.com', 'Email copied!')" title="Copy Email Address" class="text-rose-400 p-1 hover:text-rose-300 transition-colors">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Details Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 relative shadow-2xl space-y-4">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-sm font-mono bg-slate-800 px-2.5 py-1 rounded-md transition-colors" aria-label="Close Modal">✕</button>
+            <div id="modal-content"></div>
+        </div>
     </div>
-  </header>
 
-  <!-- Compact Hero (mobile-first, keeps short on phones) -->
-  <main>
-    <section id="home" class="hero-compact pt-20 md:pt-28 pb-6">
-      <div class="hero-inner">
-        <!-- Copy -->
-        <div class="hero-copy">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/6 text-blue-300 text-xs mono mb-2">
-            <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse inline-block"></span>
-            Full-Stack Architect & Founder @ Axiolab
-          </div>
+    <!-- Notification Toast Popup -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-blue-600 text-white font-mono text-xs px-4 py-3 rounded-xl shadow-xl toast-notification opacity-0 pointer-events-none flex items-center gap-2" aria-live="polite">
+        <span>✓</span>
+        <span id="toast-msg">Notification</span>
+    </div>
 
-          <h1 class="text-3xl md:text-5xl font-extrabold text-white">I build fast, responsive websites that convert</h1>
-          <p class="compact-sub max-w-xl">Helping startups and businesses launch reliable web products with performance-first engineering and clean UX.</p>
+    </main>
 
-          <div class="flex flex-wrap gap-3 items-center mt-3">
-            <a href="#contact" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold">Get a free quote</a>
-            <button id="see-work-btn" class="border border-white/6 text-slate-200 px-3 py-2 rounded-lg text-sm">See sample work</button>
-          </div>
-        </div>
-
-        <!-- Circular headshot (compact on mobile) -->
-        <div class="hero-media flex items-center justify-center">
-          <!-- Use your square headshot at /images/headshot-square.jpg or fallback -->
-          <img src="images/headshot-square.jpg" alt="Ishmam Ayon — Headshot" width="140" height="140" class="avatar" onerror="this.onerror=null; this.src='https://i.postimg.cc/14xxMtSk/profile.png'">
-        </div>
-      </div>
-
-      <!-- Compact collapsible snippet (keeps page short until expanded) -->
-      <div class="mt-4 max-w-2xl mx-auto">
-        <button id="quick-case-toggle" class="collapsible-toggle text-sm mono" aria-expanded="false" aria-controls="quick-case-panel">
-          3 quick case studies — tap to expand
-        </button>
-        <div id="quick-case-panel" class="mt-3 hidden text-sm text-slate-300 p-3 rounded-lg bg-[#071025]/40 border border-white/5">
-          <ul class="space-y-2">
-            <li><strong>Brialto</strong> — Custom e‑commerce: faster product pages, Stripe integration, conversion-first UI.</li>
-            <li><strong>Academic Portal</strong> — Student management at scale with optimized DB and concurrency controls.</li>
-            <li><strong>Document AI</strong> — Multi-page PDF parsing → validated JSON → SQL ingestion pipelines.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sticky CTA (mobile-friendly) -->
-    <a id="sticky-cta" class="sticky-cta" href="#contact" aria-label="Contact Ishmam for a free consult">Contact — Free 15 min consult</a>
-
-    <!-- Axiolab / Services (kept concise to avoid long mobile scroll) -->
-    <section id="axiolab" class="py-10 md:py-20 px-6 max-w-7xl mx-auto">
-      <div class="grid md:grid-cols-12 gap-8 items-start">
-        <div class="md:col-span-5">
-          <div class="text-xs mono text-blue-400 uppercase tracking-wider mb-2">ABOUT AXIOLAB STUDIO</div>
-          <h2 class="text-2xl md:text-4xl font-extrabold text-white">How we help clients</h2>
-          <p class="text-slate-300 text-sm mt-3">I lead a small studio that builds full-stack web products, API services, and AI automation workflows focused on measurable results and reliability.</p>
-          <div class="mt-4">
-            <a href="#contact" class="text-sm mono text-blue-400 font-semibold">Discuss a project →</a>
-          </div>
-        </div>
-
-        <div class="md:col-span-7 grid sm:grid-cols-2 gap-4">
-          <div class="p-4 rounded-xl bg-[#071025]/40 border border-white/5">
-            <h3 class="font-bold text-white text-sm">Full-Stack Web Engineering</h3>
-            <p class="text-xs text-slate-300 mt-2">React/Tailwind frontends with Django or FastAPI backends and secure integrations.</p>
-          </div>
-          <div class="p-4 rounded-xl bg-[#071025]/40 border border-white/5">
-            <h3 class="font-bold text-white text-sm">AI & Workflow Automation</h3>
-            <p class="text-xs text-slate-300 mt-2">Document parsing, RAG pipelines, and schema-validated outputs for production systems.</p>
-          </div>
-          <div class="p-4 rounded-xl bg-[#071025]/40 border border-white/5">
-            <h3 class="font-bold text-white text-sm">E‑Commerce & Payments</h3>
-            <p class="text-xs text-slate-300 mt-2">Custom storefronts and payment flows (Stripe, local gateways) built for conversion.</p>
-          </div>
-          <div class="p-4 rounded-xl bg-[#071025]/40 border border-white/5">
-            <h3 class="font-bold text-white text-sm">Database Optimization</h3>
-            <p class="text-xs text-slate-300 mt-2">Indexes, schemas, and queries designed to scale under load.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Work (kept presentational) -->
-    <section id="projects" class="py-10 md:py-16 px-6 max-w-7xl mx-auto">
-      <div class="text-center mb-6">
-        <div class="text-xs mono text-blue-400 uppercase tracking-widest">Client & Product Highlights</div>
-        <h3 class="text-2xl font-extrabold text-white mt-2">Featured Work</h3>
-      </div>
-
-      <div class="space-y-6">
-        <article class="p-4 rounded-xl bg-[#071025]/40 border border-white/5">
-          <div class="md:flex md:items-start md:gap-6">
-            <div class="md:flex-1">
-              <h4 class="font-bold text-white">Brialto — E‑commerce Platform</h4>
-              <p class="text-xs text-slate-300 mt-2">Custom catalog, instant search, and secure checkout. Focused on fast render times and conversion.</p>
-            </div>
-            <div class="mt-3 md:mt-0">
-              <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="text-sm text-blue-400">View code ↗</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="p-4 rounded-xl bg-[#071025]/40 border border-white/5">
-          <div class="md:flex md:items-start md:gap-6">
-            <div class="md:flex-1">
-              <h4 class="font-bold text-white">Academic Portal</h4>
-              <p class="text-xs text-slate-300 mt-2">Handles enrollment spikes with optimized queries and resilient architecture.</p>
-            </div>
-            <div class="mt-3 md:mt-0">
-              <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="text-sm text-blue-400">View code ↗</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="py-12 md:py-20 px-6 max-w-3xl mx-auto">
-      <div class="text-center mb-6">
-        <div class="text-xs mono text-blue-400 uppercase tracking-widest">Get in touch</div>
-        <h2 class="text-2xl font-extrabold text-white mt-2">Let's work together</h2>
-        <p class="text-xs text-slate-300 mt-2">Send a quick message or reach me via the links below.</p>
-      </div>
-
-      <div class="bg-[#071025]/40 border border-white/5 rounded-xl p-5">
-        <form id="contact-form" class="space-y-3" onsubmit="handleFormSubmit(event)">
-          <div class="grid sm:grid-cols-2 gap-3">
-            <input name="name" required placeholder="Your name" class="bg-transparent border border-white/6 rounded-lg px-3 py-2 text-sm w-full" />
-            <input name="email" type="email" required placeholder="Email" class="bg-transparent border border-white/6 rounded-lg px-3 py-2 text-sm w-full" />
-          </div>
-          <textarea name="message" rows="4" required placeholder="Project details..." class="w-full bg-transparent border border-white/6 rounded-lg px-3 py-2 text-sm"></textarea>
-          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold">Send Message →</button>
-          <div id="form-status" class="hidden text-sm mono text-center mt-2"></div>
-        </form>
-      </div>
-
-      <div class="text-center mt-6 space-y-2">
-        <div class="text-xs text-slate-400 mono">Or connect directly</div>
-        <div class="flex justify-center gap-4 mt-2">
-          <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="text-white">GitHub</a>
-          <a href="https://www.linkedin.com/in/ishmam-ayon-681759426/" target="_blank" rel="noopener" class="text-blue-400">LinkedIn</a>
-          <a href="mailto:ayondesigns6@gmail.com" class="text-rose-400">Email</a>
-        </div>
-      </div>
-    </section>
-
-    <footer class="py-8 text-center text-slate-500 text-xs mono border-t border-white/5">
-      &copy; 2026 Ishmam Ayon — Axiolab
+    <!-- Footer -->
+    <footer class="py-10 text-center text-slate-500 text-xs font-mono border-t border-white/5">
+        <div>&copy; 2026 Ishmam Ayon. All rights reserved. Founder & CEO @ Axiolab.</div>
     </footer>
-  </main>
 
-  <script>
-    // Mobile menu toggle
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
+    <script>
+        let introSkipped = false;
 
-    // Collapsible quick-case handling
-    document.addEventListener('click', (e) => {
-      const qBtn = e.target.closest('#quick-case-toggle');
-      if (qBtn) {
-        const panel = document.getElementById('quick-case-panel');
-        const expanded = qBtn.getAttribute('aria-expanded') === 'true';
-        qBtn.setAttribute('aria-expanded', String(!expanded));
-        panel.classList.toggle('hidden');
-      }
-
-      const seeWork = e.target.closest('#see-work-btn');
-      if (seeWork) {
-        // smooth scroll to projects and expand snippet
-        document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        const panel = document.getElementById('quick-case-panel');
-        panel.classList.remove('hidden');
-        document.getElementById('quick-case-toggle').setAttribute('aria-expanded', 'true');
-      }
-    });
-
-    // Contact form (basic FormSubmit.co usage)
-    async function handleFormSubmit(e) {
-      e.preventDefault();
-      const form = e.target;
-      const status = document.getElementById('form-status');
-      status.classList.add('hidden');
-      const btn = form.querySelector('button[type="submit"]');
-      const original = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = 'Sending...';
-
-      try {
-        const res = await fetch("https://formsubmit.co/ajax/ayondesigns6@gmail.com", {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            name: form.name.value,
-            email: form.email.value,
-            message: form.message.value
-          })
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !introSkipped) {
+                skipIntro();
+            }
         });
 
-        if (res.ok) {
-          status.className = 'block text-sm mono text-emerald-400 mt-2';
-          status.textContent = '✔ Message sent successfully. I will reply soon.';
-          form.reset();
-        } else throw new Error('Send failed');
-      } catch (err) {
-        status.className = 'block text-sm mono text-yellow-300 mt-2';
-        status.textContent = 'Unable to send automatically — opening mail client...';
-        window.location.href = `mailto:ayondesigns6@gmail.com?subject=${encodeURIComponent('Portfolio inquiry from ' + (form.name.value||'Visitor'))}&body=${encodeURIComponent(form.message.value||'')}`;
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = original;
-      }
-    }
+        async function runIntro() {
+            if (sessionStorage.getItem('introPlayed') === 'true') return;
+            
+            const ideContent = document.getElementById('ide-content');
+            if (!ideContent) return;
 
-    // Make sure sticky CTA only shows on small screens (redundant but safe)
-    function updateStickyVisibility() {
-      const cta = document.getElementById('sticky-cta');
-      if (!cta) return;
-      if (window.matchMedia('(max-width:720px)').matches) {
-        cta.style.display = 'inline-block';
-      } else {
-        cta.style.display = 'none';
-      }
-    }
-    updateStickyVisibility();
-    window.addEventListener('resize', updateStickyVisibility);
-  </script>
+            const codeTokens = [
+                { t: '# Initializing Ishmam Ayon Core System\n', c: 'text-slate-500' },
+                { t: 'from ', c: 'text-pink-500' },
+                { t: 'axiolab.core ', c: 'text-slate-300' },
+                { t: 'import ', c: 'text-pink-500' },
+                { t: 'Architect\n\n', c: 'text-blue-400' },
+                { t: 'engineer = Architect(name="Ishmam")\n', c: 'text-slate-300' },
+                { t: 'engineer.load_skills([', c: 'text-slate-300' },
+                { t: '"Django", "FastAPI", "React"', c: 'text-yellow-300' },
+                { t: '])\n', c: 'text-slate-300' },
+                { t: 'engineer.mount_portfolio()\n', c: 'text-blue-400' }
+            ];
+
+            const logs = [
+                '\n<span class="text-slate-500">$ python3 boot.py</span>',
+                '<span class="text-emerald-400">✔ Status: Authenticated (Ishmam Ayon)</span>',
+                '<span class="text-blue-400">✔ Portfolio UI Mounted Successfully.</span>'
+            ];
+
+            let htmlContent = '';
+            
+            await new Promise(r => setTimeout(r, 250));
+            if(introSkipped) return;
+
+            for (let token of codeTokens) {
+                if(introSkipped) return;
+                
+                let currentSpan = `<span class="${token.c}">`;
+                let closeSpan = `</span>`;
+                let tokenText = '';
+
+                for(let char of token.t) {
+                    if(introSkipped) return;
+                    tokenText += char;
+                    ideContent.innerHTML = htmlContent + currentSpan + tokenText + closeSpan + '<span class="ide-cursor"></span>';
+                    ideContent.scrollTop = ideContent.scrollHeight;
+                    await new Promise(r => setTimeout(r, Math.random() * 10 + 4));
+                }
+                htmlContent += currentSpan + tokenText + closeSpan;
+            }
+
+            if(introSkipped) return;
+            await new Promise(r => setTimeout(r, 120));
+
+            for (let i = 0; i < logs.length; i++) {
+                if(introSkipped) return;
+                htmlContent += logs[i] + '\n';
+                ideContent.innerHTML = htmlContent + '<span class="ide-cursor"></span>';
+                ideContent.scrollTop = ideContent.scrollHeight;
+                await new Promise(r => setTimeout(r, 80));
+            }
+
+            if(introSkipped) return;
+            await new Promise(r => setTimeout(r, 300));
+            skipIntro();
+        }
+
+        function skipIntro() {
+            introSkipped = true;
+            sessionStorage.setItem('introPlayed', 'true');
+            const introEl = document.getElementById('ide-intro');
+            
+            if(introEl) {
+                introEl.classList.add('intro-hide');
+                document.body.style.overflow = 'auto';
+                setTimeout(() => {
+                    introEl.remove();
+                    typeEffect();
+                }, 500); 
+            } else {
+                typeEffect();
+            }
+        }
+
+        function initApp() {
+            if (sessionStorage.getItem('introPlayed') !== 'true') {
+                runIntro();
+            } else {
+                const introEl = document.getElementById('ide-intro');
+                if(introEl) introEl.remove();
+                document.body.style.overflow = 'auto';
+                typeEffect();
+            }
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px',
+                threshold: 0.1
+            };
+            const slideObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('slide-in-visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.slide-from-left, .slide-from-right').forEach(el => {
+                slideObserver.observe(el);
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
+
+        const typewriterPhrases = [
+            "Ishmam Ayon",
+            "CEO of Axiolab",
+            "a Full-Stack Architect"
+        ];
+        let phraseIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = typewriterPhrases[phraseIdx];
+            const textEl = document.getElementById('typewriter-text');
+            
+            if (!textEl) return;
+
+            if (isDeleting) {
+                charIdx--;
+                textEl.textContent = currentPhrase.substring(0, charIdx);
+            } else {
+                charIdx++;
+                textEl.textContent = currentPhrase.substring(0, charIdx);
+            }
+
+            let typingSpeed = isDeleting ? 35 : 80;
+
+            if (!isDeleting && charIdx === currentPhrase.length) {
+                typingSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                phraseIdx = (phraseIdx + 1) % typewriterPhrases.length;
+                typingSpeed = 300;
+            }
+
+            setTimeout(typeEffect, typingSpeed);
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.arch-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.arch-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-slate-900', 'text-slate-300', 'border-slate-800');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.add('bg-blue-600', 'text-white');
+            activeBtn.classList.remove('bg-slate-900', 'text-slate-300', 'border-slate-800');
+        }
+
+        function filterProjects(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-slate-900', 'text-slate-300', 'border-slate-800');
+            });
+
+            const activeBtn = document.getElementById('filter-' + category);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-blue-600', 'text-white');
+                activeBtn.classList.remove('bg-slate-900', 'text-slate-300', 'border-slate-800');
+            }
+
+            document.querySelectorAll('.project-card').forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            const isHidden = menu.classList.contains('hidden');
+            
+            if (isHidden) {
+                menu.classList.remove('hidden');
+                btn.setAttribute('aria-expanded', 'true');
+            } else {
+                menu.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        const projectDetails = {
+            'brialto': {
+                title: 'Brialto E-Commerce Architecture',
+                desc: '<strong class="text-white">Problem:</strong> High latency on product catalog pages was causing a drop-off rate for shoppers, and inventory syncing was a manual mess.<br><br><strong class="text-white">Solution:</strong> Migrated to a headless setup with a fast React frontend and Django REST Framework. Integrated automated Stripe payments and a custom admin dashboard.<br><br><strong class="text-white">Results:</strong> Reduced page load times to sub-second speeds, increased conversion rates, and eliminated manual stock errors.',
+                highlights: [
+                    'Sub-second page rendering using optimized frontend asset loading',
+                    'Integrated secure credit card payments via Stripe API',
+                    'Custom Django admin hooks for rapid stock updates'
+                ]
+            },
+            'academic': {
+                title: 'Academic Portal Engineering',
+                desc: '<strong class="text-white">Problem:</strong> The institution struggled with database lockups during peak registration windows and required manual grade calculations.<br><br><strong class="text-white">Solution:</strong> Architected a high-concurrency Python/Django application with an optimized MySQL schema and a localized automated grading engine.<br><br><strong class="text-white">Results:</strong> Handled thousands of simultaneous users with zero downtime during registration week and saved staff hundreds of hours per semester.',
+                highlights: [
+                    'Handles enrollment workflows for over 15,000 active student records',
+                    'Optimized MySQL indexes to maintain low latency during registration peaks',
+                    'Automated CGPA computation engine replacing manual transcript entries'
+                ]
+            },
+            'ai-swarm': {
+                title: 'Multi-Agent Extraction Pipeline',
+                desc: '<strong class="text-white">Problem:</strong> The operations team was spending extensive hours manually copying unstructured data from varied PDF files into a database.<br><br><strong class="text-white">Solution:</strong> Built an automated AI pipeline using FastAPI and Vector Databases (RAG) to parse, validate, and structure the data automatically.<br><br><strong class="text-white">Results:</strong> Reduced manual data entry time by over 90% and achieved near-perfect accuracy in data ingestion validation.',
+                highlights: [
+                    'Multi-stage parsing: Layout Analysis -> Data Extraction -> Schema Validation',
+                    'Integrates vector similarity search to match extracted terms against standardized database records',
+                    'Built with Python and FastAPI for high processing throughput'
+                ]
+            }
+        };
+
+        function openProjectModal(key) {
+            const data = projectDetails[key];
+            if (!data) return;
+            
+            const modal = document.getElementById('project-modal');
+            const content = document.getElementById('modal-content');
+
+            content.innerHTML = `
+                <h3 class="text-xl font-bold text-white mb-2">${data.title}</h3>
+                <p class="text-slate-300 text-xs leading-relaxed mb-4">${data.desc}</p>
+                <div class="text-xs font-mono text-blue-400 mb-2 uppercase font-semibold">Technical Highlights:</div>
+                <ul class="space-y-2 text-xs font-mono text-slate-300">
+                    ${data.highlights.map(h => `<li class="flex items-start gap-2"><span class="text-blue-400">►</span> <span>${h}</span></li>`).join('')}
+                </ul>
+            `;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function showToast(text) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            toastMsg.textContent = text;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('toast-show');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+                toast.classList.remove('toast-show');
+            }, 3000);
+        }
+
+        function copyToClipboard(text, msg) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            showToast(msg);
+        }
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const statusDiv = document.getElementById('form-status');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Sending Message...</span>`;
+            statusDiv.classList.add('hidden');
+
+            try {
+                const response = await fetch("https://formsubmit.co/ajax/ayondesigns6@gmail.com", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: form.name.value,
+                        email: form.email.value,
+                        message: form.message.value,
+                        _subject: `[Portfolio Contact] Message from ${form.name.value}`
+                    })
+                });
+
+                if (response.ok) {
+                    statusDiv.className = "p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-xs font-mono text-center block mt-4";
+                    statusDiv.innerHTML = "✔ Your message was sent successfully! Ishmam will reply to your email shortly.";
+                    form.reset();
+                } else {
+                    throw new Error("FormSubmit issue");
+                }
+            } catch (err) {
+                statusDiv.className = "p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl text-yellow-300 text-xs font-mono text-center block space-y-2 mt-4";
+                statusDiv.innerHTML = `
+                    <div>Unable to submit via background service. Opening direct mail client...</div>
+                    <a href="mailto:ayondesigns6@gmail.com?subject=Inquiry from ${encodeURIComponent(form.name.value)}&body=${encodeURIComponent(form.message.value)}" class="inline-block mt-2 px-4 py-2 bg-yellow-500/20 text-yellow-200 border border-yellow-500/40 rounded-lg hover:bg-yellow-500/30 transition-colors">Click here to send email directly →</a>
+                `;
+                window.location.href = `mailto:ayondesigns6@gmail.com?subject=Inquiry from ${encodeURIComponent(form.name.value)}&body=${encodeURIComponent(form.message.value)}`;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        }
+    </script>
 </body>
 </html>
