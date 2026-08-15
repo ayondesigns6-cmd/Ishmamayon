@@ -697,92 +697,136 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            <!-- Project 01: Brialto -->
-            <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left" data-category="ecommerce">
-                < rel="noopener" class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
-                    <img src="https://cdn.dribbble.com/userupload/9000437/file/original-05ce7878ecc282d0bdbc476f002b6087.png?resize=752x&vertical=center" alt="Brialto E-Commerce Preview" loading="lazy" 
-                         class="w-full h-full objs://cdn.dribbble.com/userupload/9000437/file/original-05ce7878ecc282d0bdbc476f002b6087.png?ect-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
-                        <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
-                            <span class="text-blue-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">Explore Code ↗</span>
-                        </div>
-                    </div>
-                </a>
-                <div class="p-5 flex-1 flex flex-col">
-                    <div class="mb-2">
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">E-Commerce</span>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2 leading-tight">Brialto — Storefront</h4>
-                    <p class="text-slate-400 text-xs leading-relaxed mb-4 flex-1">Fast e-commerce platform with custom product catalog management, instant search, and secure payment processing.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">React</span>
-                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Django</span>
-                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Stripe</span>
-                    </div>
-                    <button onclick="openProjectModal('brialto')" class="mt-auto inline-flex items-center justify-between w-full text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/20 px-3 py-2 rounded-lg transition-colors">
-                        View Technical Details <span>→</span>
-                    </button>
-                </div>
+           <!-- Project 01: Brialto -->
+<div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left" data-category="ecommerce">
+    <div class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
+        <img
+            src="https://cdn.dribbble.com/userupload/9000437/file/original-05ce7878ecc282d0bdbc476f002b6087.png?resize=752x&vertical=center"
+            alt="Brialto E-Commerce Preview"
+            loading="lazy"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+        >
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
+            <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
+                <span class="text-blue-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">
+                    Explore Code ↗
+                </span>
             </div>
-
-            <!-- Project 02: Academic Portal -->
-            <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left delay-100" data-category="web">
-                <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
-                    <img src="https://cdn.dribbble.com/userupload/7842068/file/original-ef35640c10b7a0c1a6d3f8b3a2f99064.png?resize=1024x768&vertical=center" alt="Academic Portal Interface Preview" loading="lazy" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
-                        <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
-                            <span class="text-indigo-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">Explore Code ↗</span>
-                        </div>
-                    </div>
-                </a>
-                <div class="p-5 flex-1 flex flex-col">
-                    <div class="mb-2">
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">Web App</span>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2 leading-tight">Academic Portal</h4>
-                    <p class="text-slate-400 text-xs leading-relaxed mb-4 flex-1">Comprehensive academic system handling student enrollment, course registrations, and automatic CGPA calculations.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Python</span>
-                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Django</span>
-                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">MySQL</span>
-                    </div>
-                    <button onclick="openProjectModal('academic')" class="mt-auto inline-flex items-center justify-between w-full text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/20 px-3 py-2 rounded-lg transition-colors">
-                        View Technical Details <span>→</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Project 03: Multi-Agent AI -->
-            <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left delay-200" data-category="ai">
-                <a href="https://github.com/Ishmamayon" target="_blank" rel="noopener" class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
-                    <img src="https://midias-blog-mkt.s3.amazonaws.com/uploads/2023/12/IDP-EN.png" alt="AI Extraction Pipeline Dashboard Preview" loading="lazy" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
-                        <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
-                            <span class="text-cyan-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">View Project ↗</span>
-                        </div>
-                    </div>
-                </a>
-                <div class="p-5 flex-1 flex flex-col">
-                    <div class="mb-2">
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">Automation</span>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2 leading-tight">Data Extraction AI</h4>
-                    <p class="text-slate-400 text-xs leading-relaxed mb-4 flex-1">Automated document parsing tool that converts unstructured multi-page PDFs into verified database records.</p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">FastAPI</span>
-                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Vector DB</span>
-                        <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">PostgreSQL</span>
-                    </div>
-                    <button onclick="openProjectModal('ai-swarm')" class="mt-auto inline-flex items-center justify-between w-full text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/20 px-3 py-2 rounded-lg transition-colors">
-                        View Technical Details <span>→</span>
-                    </button>
-                </div>
-            </div>
-
         </div>
-    </section>
+    </div>
+
+    <div class="p-5 flex-1 flex flex-col">
+        <div class="mb-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                E-Commerce
+            </span>
+        </div>
+
+        <h4 class="text-lg font-bold text-white mb-2 leading-tight">Brialto — Storefront</h4>
+
+        <p class="text-slate-400 text-xs leading-relaxed mb-4 flex-1">
+            Fast e-commerce platform with custom product catalog management, instant search, and secure payment processing.
+        </p>
+
+        <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">React</span>
+            <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Django</span>
+            <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Stripe</span>
+        </div>
+
+        <button onclick="openProjectModal('brialto')" class="mt-auto inline-flex items-center justify-between w-full text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/20 px-3 py-2 rounded-lg transition-colors">
+            View Technical Details <span>→</span>
+        </button>
+    </div>
+</div>
+
+
+<!-- Project 02: Academic Portal -->
+<div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left delay-100" data-category="web">
+    <div class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
+        <img
+            src="https://cdn.dribbble.com/userupload/7842068/file/original-ef35640c10b7a0c1a6d3f8b3a2f99064.png?resize=1024x768&vertical=center"
+            alt="Academic Portal Interface Preview"
+            loading="lazy"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+        >
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
+            <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
+                <span class="text-indigo-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">
+                    Explore Code ↗
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-5 flex-1 flex flex-col">
+        <div class="mb-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+                Web App
+            </span>
+        </div>
+
+        <h4 class="text-lg font-bold text-white mb-2 leading-tight">Academic Portal</h4>
+
+        <p class="text-slate-400 text-xs leading-relaxed mb-4 flex-1">
+            Comprehensive academic system handling student enrollment, course registrations, and automatic CGPA calculations.
+        </p>
+
+        <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Python</span>
+            <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Django</span>
+            <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">MySQL</span>
+        </div>
+
+        <button onclick="openProjectModal('academic')" class="mt-auto inline-flex items-center justify-between w-full text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/20 px-3 py-2 rounded-lg transition-colors">
+            View Technical Details <span>→</span>
+        </button>
+    </div>
+</div>
+
+
+<!-- Project 03: Multi-Agent AI -->
+<div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 transition-all hover:border-blue-500/40 flex flex-col slide-from-left delay-200" data-category="ai">
+    <div class="group relative block aspect-[16/9] bg-slate-950 overflow-hidden border-b border-white/5">
+        <img
+            src="https://midias-blog-mkt.s3.amazonaws.com/uploads/2023/12/IDP-EN.png"
+            alt="AI Extraction Pipeline Dashboard Preview"
+            loading="lazy"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+        >
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-4">
+            <div class="flex items-center justify-end text-[10px] font-mono text-white font-medium">
+                <span class="text-cyan-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 bg-slate-900/80 px-2 py-1 rounded backdrop-blur-sm border border-white/10">
+                    View Project ↗
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-5 flex-1 flex flex-col">
+        <div class="mb-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+                Automation
+            </span>
+        </div>
+
+        <h4 class="text-lg font-bold text-white mb-2 leading-tight">Data Extraction AI</h4>
+
+        <p class="text-slate-400 text-xs leading-relaxed mb-4 flex-1">
+            Automated document parsing tool that converts unstructured multi-page PDFs into verified database records.
+        </p>
+
+        <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">FastAPI</span>
+            <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">Vector DB</span>
+            <span class="text-[10px] font-mono bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded">PostgreSQL</span>
+        </div>
+
+        <button onclick="openProjectModal('ai-swarm')" class="mt-auto inline-flex items-center justify-between w-full text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/5 hover:bg-blue-500/10 border border-blue-500/20 px-3 py-2 rounded-lg transition-colors">
+            View Technical Details <span>→</span>
+        </button>
+    </div>
+</div>
 
     <!-- Client Success / Social Proof -->
     <section class="py-10 md:py-16 max-w-5xl mx-auto px-6 slide-from-right">
